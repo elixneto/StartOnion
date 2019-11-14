@@ -5,7 +5,7 @@ namespace StartOnion.Camada.Dominio
 {
     public abstract class Entidade : Notificavel
     {
-        public string Id { get; private set; }
+        public string Id { get; protected set; }
 
         public Entidade()
         {

@@ -1,3 +1,4 @@
+using StartOnion.Camada.CrossCutting.Testes.Extensoes;
 using StartOnion.Camada.Dominio.TestesDeUnidade.NullObjects;
 using System;
 using Xunit;
@@ -29,6 +30,28 @@ namespace StartOnion.Camada.Dominio.TestesDeUnidade
             var _entidade = new EntidadeNull();
 
             Assert.True(_entidade.EhValido);
+        }
+
+        [Fact]
+        public void DeveRetornarVerdadeiroParaEntidadesComMesmoId()
+        {
+            var entidade1 = new EntidadeNull();
+            entidade1.ComValor(() => entidade1.Id, "1");
+            var entidade2 = new EntidadeNull();
+            entidade2.ComValor(() => entidade2.Id, "1");
+
+            Assert.True(entidade1 == entidade2);
+        }
+
+        [Fact]
+        public void DeveRetornarFalsoParaEntidadesComIdDiferente()
+        {
+            var entidade1 = new EntidadeNull();
+            entidade1.ComValor(() => entidade1.Id, "1");
+            var entidade2 = new EntidadeNull();
+            entidade2.ComValor(() => entidade2.Id, "2");
+
+            Assert.False(entidade1 == entidade2);
         }
     }
 }
