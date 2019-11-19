@@ -6,7 +6,7 @@ namespace StartOnion.Camada.Dominio.TestesDeUnidade
 {
     public class ValidadorDeEntidadeTeste
     {
-        private readonly ValidadorDeEntidade<EntidadeNull> _validador = new ValidadorDeEntidadeNull();
+        private readonly Validador<EntidadeNull> _validador = new ValidadorDeEntidadeNull();
 
         [Fact]
         public void ValidadorDeveSerUmIValidator()

@@ -3,7 +3,7 @@ using StartOnion.Camada.Dominio.Interfaces;
 
 namespace StartOnion.Camada.Dominio.TestesDeUnidade.NullObjects
 {
-    class ValidadorDeEntidadeNull : ValidadorDeEntidade<EntidadeNull>
+    class ValidadorDeEntidadeNull : Validador<EntidadeNull>
     {
         public ValidadorDeEntidadeNull()
         {
