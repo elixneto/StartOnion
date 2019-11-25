@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace StartOnion.Camada.Dominio
 {
-    internal class Notificador : INotificador
+    public sealed class Notificador : INotificador
     {
         private readonly List<string> _notificacoes = new List<string>();
         public IReadOnlyCollection<string> Notificacoes => _notificacoes;
