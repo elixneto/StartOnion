@@ -3,7 +3,7 @@ using Raven.Client.Documents;
 
 namespace StartOnion.Implementacao.Repositorio
 {
-    internal class ConfiguracaoDoBancoDeDados
+    public sealed class ConfiguracaoDoBancoDeDados
     {
         public DocumentStore DocumentStore { get; }
 

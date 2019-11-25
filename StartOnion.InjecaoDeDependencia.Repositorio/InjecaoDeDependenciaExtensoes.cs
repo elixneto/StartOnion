@@ -2,17 +2,18 @@
 using Microsoft.Extensions.DependencyInjection;
 using Raven.Client.Documents;
 using StartOnion.Camada.Dominio.Interfaces;
+using StartOnion.Implementacao.Repositorio;
 
-namespace StartOnion.Implementacao.Repositorio.Extensoes
+namespace StartOnion.InjecaoDeDependencia.Repositorio
 {
-    public static class InjecaoDeDependencia
+    public static class InjecaoDeDependenciaExtensoes
     {
-        public static void StartOnionImplementacaoRepositorio(this IServiceCollection servicos, string urlDoBanco, string nomeDoBanco, ICollectionMapperRavenDB mapeadorDeColecoes)
+        public static void AddStartOnionRepositorio(this IServiceCollection servicos, string urlDoBanco, string nomeDoBanco, ICollectionMapperRavenDB mapeadorDeColecoes)
         {
             servicos.AddSingleton<IDocumentStore>(new ConfiguracaoDoBancoDeDados(urlDoBanco, nomeDoBanco, mapeadorDeColecoes).DocumentStore);
 
-            servicos.AddScoped<IRepositorioDeEvento, RepositorioDeEvento>();
             servicos.AddScoped<ContextoDoBancoDeDados>();
+            servicos.AddScoped<IRepositorioDeEvento, RepositorioDeEvento>();
         }
     }
 }
