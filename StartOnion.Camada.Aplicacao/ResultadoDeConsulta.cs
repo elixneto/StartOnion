@@ -2,9 +2,15 @@
 
 namespace StartOnion.Camada.Aplicacao
 {
-    public class ResultadoDeConsulta
+    public class ResultadoDeConsulta<T> where T: VM
     {
-        public IEnumerable<VM> Registros { get; set; }
-        public int QuantidadeTotalDeRegistros { get; set; }
+        public int QuantidadeTotalDeRegistros { get; }
+        public IEnumerable<T> Registros { get; }
+
+        public ResultadoDeConsulta(int quantidadeTotal, IEnumerable<T> registros)
+        {
+            QuantidadeTotalDeRegistros = quantidadeTotal;
+            Registros = registros;
+        }
     }
 }
