@@ -14,7 +14,7 @@ namespace StartOnion.Camada.Dominio
         public ManipuladorDeComando(INotificador notificador, IMediator mediator) { this._notificador = notificador; this._mediator = mediator; }
 
         public abstract TResponse Executar(TRequest comando);
-        protected abstract void Validar(TRequest request);
+        protected abstract void Validar(TRequest comando);
 
         public void PublicarEvento(Evento evento) => this._mediator.Publish(evento);
 
