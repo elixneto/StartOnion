@@ -2,12 +2,12 @@
 
 namespace StartOnion.Camada.Dominio.Interfaces
 {
-    public interface IRepositorioDeEntidade<T>
+    public interface IRepositorioDeEntidade<TEntity>
     {
-        T ObterPorId(string id);
-        void Adicionar(T entidade);
-        void Adicionar(ICollection<T> entidades);
-        void Remover(T entidade);
-        void Remover(ICollection<T> entidades);
+        TEntity ObterPorId(string id);
+        void Adicionar(TEntity entidade);
+        void Adicionar(ICollection<TEntity> entidades);
+        void Remover(TEntity entidade);
+        void Remover(ICollection<TEntity> entidades);
     }
 }

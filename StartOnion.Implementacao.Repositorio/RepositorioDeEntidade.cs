@@ -3,33 +3,28 @@ using System.Collections.Generic;
 
 namespace StartOnion.Implementacao.Repositorio
 {
-    public abstract class RepositorioDeEntidade<T> : IRepositorioDeEntidade<T>
+    public abstract class RepositorioDeEntidade<TEntity> : IRepositorioDeEntidade<TEntity>
     {
         public readonly ContextoDoBancoDeDados _contexto;
 
-        public RepositorioDeEntidade(ContextoDoBancoDeDados contexto)
+        protected RepositorioDeEntidade(ContextoDoBancoDeDados contexto)
         {
             _contexto = contexto;
         }
 
-        public void Adicionar(T entidade) => _contexto.Sessao.Store(entidade);
+        public void Adicionar(TEntity entidade) => _contexto.Sessao.Store(entidade);
 
-        public void Adicionar(ICollection<T> entidades)
+        public void Adicionar(ICollection<TEntity> entidades)
         {
             foreach (var entidade in entidades)
                 this.Adicionar(entidade);
         }
 
-        public void Atualizar(T entidade)
-        {
-            throw new System.NotImplementedException();
-        }
+        public TEntity ObterPorId(string id) => _contexto.Sessao.Load<TEntity>(id);
 
-        public T ObterPorId(string id) => _contexto.Sessao.Load<T>(id);
+        public void Remover(TEntity entidade) => _contexto.Sessao.Delete(entidade);
 
-        public void Remover(T entidade) => _contexto.Sessao.Delete(entidade);
-
-        public void Remover(ICollection<T> entidades)
+        public void Remover(ICollection<TEntity> entidades)
         {
             foreach (var entidade in entidades)
                 this.Remover(entidade);
