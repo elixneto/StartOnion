@@ -2,7 +2,7 @@
 
 namespace StartOnion.Camada.Dominio.Interfaces
 {
-    public interface IRepositorioDeEntidade<T> where T : Entidade
+    public interface IRepositorioDeEntidade<T>
     {
         T ObterPorId(string id);
         void Adicionar(T entidade);

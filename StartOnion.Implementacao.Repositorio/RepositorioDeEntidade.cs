@@ -1,10 +1,9 @@
-﻿using StartOnion.Camada.Dominio;
-using StartOnion.Camada.Dominio.Interfaces;
+﻿using StartOnion.Camada.Dominio.Interfaces;
 using System.Collections.Generic;
 
 namespace StartOnion.Implementacao.Repositorio
 {
-    public abstract class RepositorioDeEntidade<T> : IRepositorioDeEntidade<T> where T : Entidade
+    public abstract class RepositorioDeEntidade<T> : IRepositorioDeEntidade<T>
     {
         public readonly ContextoDoBancoDeDados _contexto;
 
@@ -13,7 +12,7 @@ namespace StartOnion.Implementacao.Repositorio
             _contexto = contexto;
         }
 
-        public void Adicionar(T entidade) => _contexto.Sessao.Store(entidade, entidade.Id);
+        public void Adicionar(T entidade) => _contexto.Sessao.Store(entidade);
 
         public void Adicionar(ICollection<T> entidades)
         {
