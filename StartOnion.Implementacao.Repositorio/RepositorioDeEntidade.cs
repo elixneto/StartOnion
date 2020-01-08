@@ -12,19 +12,19 @@ namespace StartOnion.Implementacao.Repositorio
             _contexto = contexto;
         }
 
-        public void Adicionar(TEntity entidade) => _contexto.Sessao.Store(entidade);
+        public virtual void Adicionar(TEntity entidade) => _contexto.Sessao.Store(entidade);
 
-        public void Adicionar(ICollection<TEntity> entidades)
+        public virtual void Adicionar(ICollection<TEntity> entidades)
         {
             foreach (var entidade in entidades)
                 this.Adicionar(entidade);
         }
 
-        public TEntity ObterPorId(string id) => _contexto.Sessao.Load<TEntity>(id);
+        public virtual TEntity ObterPorId(string id) => _contexto.Sessao.Load<TEntity>(id);
 
-        public void Remover(TEntity entidade) => _contexto.Sessao.Delete(entidade);
+        public virtual void Remover(TEntity entidade) => _contexto.Sessao.Delete(entidade);
 
-        public void Remover(ICollection<TEntity> entidades)
+        public virtual void Remover(ICollection<TEntity> entidades)
         {
             foreach (var entidade in entidades)
                 this.Remover(entidade);
