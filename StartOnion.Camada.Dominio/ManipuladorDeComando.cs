@@ -18,13 +18,13 @@ namespace StartOnion.Camada.Dominio
 
         public void PublicarEvento(Evento evento) => this._mediator.Publish(evento);
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
+        public async Task<TResponse> Handle(TRequest comando, CancellationToken cancellationToken)
         {
             await Task.Run(() => { }); // Método é async e espera a keyword await para não dar warning de compilação
 
-            this.Validar(request);
-            if (!this._notificador.PossuiNotificacoes)
-                return this.Executar(request);
+            this.Validar(comando);
+            if (!this._notificador.PossuiNotificacoes())
+                return this.Executar(comando);
 
             return default;
         }

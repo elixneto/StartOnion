@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementacoes", "Implement
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartOnion.Implementacao.Repositorio", "StartOnion.Implementacao.Repositorio\StartOnion.Implementacao.Repositorio.csproj", "{7F3021BE-6062-495E-A9A8-180EB7DE2F16}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InjecaoDeDependencias", "InjecaoDeDependencias", "{56AC17DD-FB7D-4C94-A9D2-684E104D315F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartOnion.InjecaoDeDependencia", "StartOnion.InjecaoDeDependencia\StartOnion.InjecaoDeDependencia.csproj", "{E11C667D-E6CE-4534-8861-66EB790ABD94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{7F3021BE-6062-495E-A9A8-180EB7DE2F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F3021BE-6062-495E-A9A8-180EB7DE2F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F3021BE-6062-495E-A9A8-180EB7DE2F16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E11C667D-E6CE-4534-8861-66EB790ABD94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E11C667D-E6CE-4534-8861-66EB790ABD94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E11C667D-E6CE-4534-8861-66EB790ABD94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E11C667D-E6CE-4534-8861-66EB790ABD94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +66,7 @@ Global
 		{2E0AF625-4E82-4333-BBB3-5431676F3E80} = {23C7DF06-053C-4846-97E7-76A2C4BC9783}
 		{C48D7B40-FF1A-4A3E-8B57-98D340125373} = {23C7DF06-053C-4846-97E7-76A2C4BC9783}
 		{7F3021BE-6062-495E-A9A8-180EB7DE2F16} = {9633AF14-8322-436A-9F4B-D814D8E24BCE}
+		{E11C667D-E6CE-4534-8861-66EB790ABD94} = {56AC17DD-FB7D-4C94-A9D2-684E104D315F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EFE5A2A2-0563-4E05-9686-979C2D14E459}

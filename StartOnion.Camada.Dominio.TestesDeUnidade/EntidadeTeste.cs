@@ -29,7 +29,7 @@ namespace StartOnion.Camada.Dominio.TestesDeUnidade
         {
             var _entidade = new EntidadeNull();
 
-            Assert.True(_entidade.EhValido);
+            Assert.True(_entidade.EhValido());
         }
 
         [Fact]
