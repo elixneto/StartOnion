@@ -10,6 +10,7 @@ namespace StartOnion.Implementacao.Repositorio
         public ConfiguracaoDoBancoDeDados(string urlDoBanco, string nomeDoBanco, ICollectionMapperRavenDB mapeador)
         {
             mapeador.IgnoreProperties(new string[] { "EhValido", "Notificacoes" }); // Propriedades da Entidade
+            mapeador.IncludeNonPublicProperties();
 
             DocumentStore = new DocumentStore()
             {
@@ -17,7 +18,7 @@ namespace StartOnion.Implementacao.Repositorio
                 Database = nomeDoBanco,
                 Conventions = {
                     FindCollectionName = (type) => mapeador.FindCollectionBy(type),
-                    JsonContractResolver = mapeador.GetPropertyIgnorerContract()
+                    JsonContractResolver = mapeador.GetPropertiesContract()
                 }
             };
             DocumentStore.Initialize();
