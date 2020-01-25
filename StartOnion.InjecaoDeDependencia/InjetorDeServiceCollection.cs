@@ -16,7 +16,7 @@ namespace StartOnion.InjecaoDeDependencia
             return services;
         }
 
-        public static IServiceCollection AddStartOnionDominio(this IServiceCollection services, string urlDoBanco, string nomeDoBanco, CollectionMapperRavenDB mapeadorDeColecoes)
+        public static IServiceCollection AddStartOnionRepositorio(this IServiceCollection services, string urlDoBanco, string nomeDoBanco, CollectionMapperRavenDB mapeadorDeColecoes)
         {
             services.AddSingleton<IDocumentStore>(new ConfiguracaoDoBancoDeDados(urlDoBanco, nomeDoBanco, mapeadorDeColecoes).DocumentStore);
             services.AddScoped<ContextoDoBancoDeDados>();
