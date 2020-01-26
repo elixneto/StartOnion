@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using StartOnion.Camada.Dominio.Exceptions;
 using System;
 
 namespace StartOnion.Camada.Dominio
@@ -7,12 +8,26 @@ namespace StartOnion.Camada.Dominio
     {
         public string Id { get; protected set; }
 
+        private readonly IValidator _validador;
+
         public Entidade()
         {
-            this.Id = this.Id ?? Guid.NewGuid().ToString();
+            CriarId();
         }
 
-        public void Validar(IValidator validador) => base.AdicionarNotificacoes(validador.Validate(this).Errors);
+        public Entidade(IValidator validador)
+        {
+            CriarId();
+            _validador = validador;
+        }
+
+        public void Validar()
+        {
+            if (_validador == null)
+                throw new ValidadorNaoInformadoException();
+
+            base.AdicionarNotificacoes(_validador.Validate(this).Errors);
+        }
 
         public override bool Equals(object obj)
         {
@@ -30,5 +45,7 @@ namespace StartOnion.Camada.Dominio
         public static bool operator ==(Entidade e1, Entidade e2) => Equals(e1, e2);
 
         public static bool operator !=(Entidade e1, Entidade e2) => !Equals(e1, e2);
+
+        private string CriarId() => Id = Id ?? Guid.NewGuid().ToString();
     }
 }
