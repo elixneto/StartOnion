@@ -4,9 +4,9 @@
     {
         public string CampoCustom => "Campo Custom";
 
-        public EntidadeNull()
+        public EntidadeNull() : base(new ValidadorDeEntidadeNull())
         {
-            base.Validar(new ValidadorDeEntidadeNull());
+            base.Validar();
         }
     }
 }

@@ -1,14 +1,17 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 
 namespace StartOnion.Camada.Aplicacao
 {
     public abstract class ServicoDeAplicacao
     {
         protected readonly IMediator _mediador;
+        protected readonly IMapper _mapeador;
 
-        public ServicoDeAplicacao(IMediator mediador)
+        public ServicoDeAplicacao(IMediator mediador, IMapper mapeador)
         {
-            this._mediador = mediador;
+            _mediador = mediador;
+            _mapeador = mapeador;
         }
     }
 }
