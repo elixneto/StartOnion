@@ -12,14 +12,16 @@ namespace StartOnion.Camada.Aplicacao.Comandos
 
         public ManipuladorDeComando(INotificadorContexto notificador) { _notificador = notificador;}
 
-        public abstract Task<TResponse> Executar(TRequest comando);
-        protected abstract Task Validar(TRequest comando);
+        public abstract TResponse Executar(TRequest comando);
+        protected abstract void Validar(TRequest comando);
 
         public async Task<TResponse> Handle(TRequest comando, CancellationToken cancellationToken)
         {
-            await Validar(comando);
+            await Task.Run(() => { });
+
+            Validar(comando);
             if (!_notificador.PossuiNotificacoes())
-                return await Executar(comando);
+                return Executar(comando);
 
             return default;
         }

@@ -5,9 +5,9 @@ namespace StartOnion.Implementacao.Repositorio
 {
     public abstract class RepositorioDeEntidade<TEntity> : IRepositorioDeEntidade<TEntity>
     {
-        public readonly ContextoDoBancoDeDados _contexto;
+        public readonly BancoDeDadosContexto _contexto;
 
-        protected RepositorioDeEntidade(ContextoDoBancoDeDados contexto)
+        protected RepositorioDeEntidade(BancoDeDadosContexto contexto)
         {
             _contexto = contexto;
         }

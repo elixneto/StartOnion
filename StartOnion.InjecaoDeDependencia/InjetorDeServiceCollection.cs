@@ -1,9 +1,13 @@
 ﻿using AutoMapper;
 using CollectionMapper.RavenDB.NetCore;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Raven.Client.Documents;
 using StartOnion.Camada.CrossCutting.Notificacoes;
+using StartOnion.Implementacao.API.Providers.Autenticacao;
 using StartOnion.Implementacao.Repositorio;
 using System.Reflection;
 
@@ -11,6 +15,26 @@ namespace StartOnion.InjecaoDeDependencia
 {
     public static class InjetorDeServiceCollection
     {
+        public static IServiceCollection AddStartOnionAPI(this IServiceCollection services, IConfiguration configuration)
+        {
+            var provedorDeTokenJwt = new TokenJwtProvider(configuration);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = provedorDeTokenJwt.ObterIssuer(),
+                        ValidAudience = provedorDeTokenJwt.ObterAudience(),
+                        IssuerSigningKey = provedorDeTokenJwt.ObterChaveDeSegurancaSimetrica()
+                    };
+                });
+
+            return services;
+        }
+
         public static IServiceCollection AddStartOnionAplicacao(this IServiceCollection services, Assembly assemblyDosManipuladoresDeComando, Assembly assemblyDosMapeadores)
         {
             services.AddMediatR(assemblyDosManipuladoresDeComando);
@@ -29,7 +53,7 @@ namespace StartOnion.InjecaoDeDependencia
         public static IServiceCollection AddStartOnionRepositorio(this IServiceCollection services, string urlDoBanco, string nomeDoBanco, CollectionMapperRavenDB mapeadorDeColecoes)
         {
             services.AddSingleton<IDocumentStore>(new ConfiguracaoDoBancoDeDados(urlDoBanco, nomeDoBanco, mapeadorDeColecoes).DocumentStore);
-            services.AddScoped<ContextoDoBancoDeDados>();
+            services.AddScoped<BancoDeDadosContexto>();
 
             return services;
         }

@@ -3,11 +3,11 @@ using Raven.Client.Documents.Session;
 
 namespace StartOnion.Implementacao.Repositorio
 {
-    public sealed class ContextoDoBancoDeDados
+    public sealed class BancoDeDadosContexto
     {
         public readonly IDocumentSession Sessao;
 
-        public ContextoDoBancoDeDados(IDocumentStore documentStore)
+        public BancoDeDadosContexto(IDocumentStore documentStore)
         {
             this.Sessao = documentStore.OpenSession();
         }
