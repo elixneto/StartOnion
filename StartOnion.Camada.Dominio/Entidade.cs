@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using StartOnion.Camada.CrossCutting.Notificacoes;
+using StartOnion.Camada.Dominio.Exceptions;
 using System;
 
 namespace StartOnion.Camada.Dominio
@@ -26,7 +27,7 @@ namespace StartOnion.Camada.Dominio
             if (_validador == null)
                 throw new ValidadorNaoInformadoException();
 
-            base.AdicionarNotificacoes(_validador.Validate(this).Errors);
+            AdicionarNotificacoes(_validador.Validate(this).Errors);
         }
 
         public override bool Equals(object obj)
