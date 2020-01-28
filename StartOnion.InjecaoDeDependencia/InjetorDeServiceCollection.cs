@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Raven.Client.Documents;
 using StartOnion.Camada.CrossCutting.Notificacoes;
-using StartOnion.Implementacao.API.Providers.Autenticacao;
+using StartOnion.Camada.CrossCutting.Providers.Autenticacao;
 using StartOnion.Implementacao.Repositorio;
 using System.Reflection;
 
@@ -45,6 +45,8 @@ namespace StartOnion.InjecaoDeDependencia
 
         public static IServiceCollection AddStartOnionCrossCutting(this IServiceCollection services)
         {
+            services.AddSingleton<ITokenJwtProvider, TokenJwtProvider>();
+
             services.AddScoped<INotificadorContexto, NotificadorContexto>();
 
             return services;

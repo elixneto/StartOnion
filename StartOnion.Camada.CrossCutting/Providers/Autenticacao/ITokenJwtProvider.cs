@@ -1,7 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 
-namespace StartOnion.Implementacao.API.Providers.Autenticacao
+namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
 {
     public interface ITokenJwtProvider
     {

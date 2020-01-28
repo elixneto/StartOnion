@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using StartOnion.Implementacao.API.Exceptions;
+using StartOnion.Camada.CrossCutting.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace StartOnion.Implementacao.API.Providers.Autenticacao
+namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
 {
     public sealed class TokenJwtProvider : ITokenJwtProvider
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StartOnion.Implementacao.API.Exceptions
+namespace StartOnion.Camada.CrossCutting.Exceptions
 {
     public class JwtNaoConfiguradoException : Exception
     {
