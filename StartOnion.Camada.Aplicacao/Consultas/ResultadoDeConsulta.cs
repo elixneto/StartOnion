@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using StartOnion.Camada.Aplicacao.VMs;
+using System.Collections.Generic;
 
-namespace StartOnion.Camada.Aplicacao
+namespace StartOnion.Camada.Aplicacao.Consultas
 {
     public class ResultadoDeConsulta<T> where T: VM
     {

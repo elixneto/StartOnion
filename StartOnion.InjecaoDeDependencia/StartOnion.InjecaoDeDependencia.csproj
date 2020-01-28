@@ -7,10 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StartOnion.Camada.Aplicacao\StartOnion.Camada.Aplicacao.csproj" />
+    <ProjectReference Include="..\StartOnion.Camada.CrossCutting\StartOnion.Camada.CrossCutting.csproj" />
     <ProjectReference Include="..\StartOnion.Camada.Dominio\StartOnion.Camada.Dominio.csproj" />
     <ProjectReference Include="..\StartOnion.Implementacao.Repositorio\StartOnion.Implementacao.Repositorio.csproj" />
   </ItemGroup>

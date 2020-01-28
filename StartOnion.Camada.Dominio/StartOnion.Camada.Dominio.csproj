@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.5.1" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <ProjectReference Include="..\StartOnion.Camada.CrossCutting\StartOnion.Camada.CrossCutting.csproj" />
   </ItemGroup>
 
 </Project>

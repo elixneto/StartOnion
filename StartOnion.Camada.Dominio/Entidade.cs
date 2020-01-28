@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using StartOnion.Camada.CrossCutting.Notificacoes;
 using System;
 
 namespace StartOnion.Camada.Dominio

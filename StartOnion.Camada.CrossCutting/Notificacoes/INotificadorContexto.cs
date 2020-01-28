@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace StartOnion.Camada.Dominio.Interfaces
+namespace StartOnion.Camada.CrossCutting.Notificacoes
 {
-    public interface INotificador
+    public interface INotificadorContexto
     {
         IReadOnlyCollection<string> Notificacoes { get; }
 

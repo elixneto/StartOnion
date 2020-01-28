@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace StartOnion.Camada.Dominio
+namespace StartOnion.Camada.Aplicacao.Comandos
 {
     public abstract class Comando<T> : IRequest<T> { }
 }

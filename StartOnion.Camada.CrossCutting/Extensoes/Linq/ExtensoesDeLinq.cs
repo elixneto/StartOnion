@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace StartOnion.Camada.Dominio
+namespace StartOnion.Camada.CrossCutting.Extensoes.Linq
 {
     public static class ExtensoesDeLinq
     {
