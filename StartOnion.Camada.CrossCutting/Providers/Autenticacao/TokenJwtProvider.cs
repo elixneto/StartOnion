@@ -11,12 +11,19 @@ using System.Text;
 
 namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
 {
+    /// <summary>
+    /// Provedor de Token JWT
+    /// </summary>
     public sealed class TokenJwtProvider : ITokenJwtProvider
     {
         private readonly string _chaveDeSeguranca;
         private readonly string _issuer;
         private readonly string _audience;
 
+        /// <summary>
+        /// Construtor padrão com injeção de IConfiguration
+        /// </summary>
+        /// <param name="configuracao"></param>
         public TokenJwtProvider(IConfiguration configuracao)
         {
             var jwtSection = configuracao.GetSection("Jwt");
@@ -32,6 +39,12 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
                 throw new JwtNaoConfiguradoException();
         }
 
+        /// <summary>
+        /// Retorna o token JWT
+        /// </summary>
+        /// <param name="Id">Identificador único do usuário</param>
+        /// <param name="roles">Lista de roles a serem incluídas como claims</param>
+        /// <returns></returns>
         public string GerarToken(string Id, IEnumerable<string> roles)
         {
             var _claimOptions = new IdentityOptions();
@@ -48,9 +61,21 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
                             claims: claims));
         }
 
+        /// <summary>
+        /// Issuer do JWT
+        /// </summary>
+        /// <returns></returns>
         public string ObterIssuer() => _issuer;
+        /// <summary>
+        /// Audience do JWT
+        /// </summary>
+        /// <returns></returns>
         public string ObterAudience() => _audience;
 
+        /// <summary>
+        /// SymmetricSecurityKey da chave de segurança
+        /// </summary>
+        /// <returns></returns>
         public SymmetricSecurityKey ObterChaveDeSegurancaSimetrica()
             => new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_chaveDeSeguranca));
 

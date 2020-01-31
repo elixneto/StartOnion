@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StartOnion.Camada.CrossCutting</name>
+    </assembly>
+    <members>
+        <member name="T:StartOnion.Camada.CrossCutting.Providers.Autenticacao.ITokenJwtProvider">
+            <summary>
+            Provedor de Token JWT
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Providers.Autenticacao.ITokenJwtProvider.GerarToken(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Retorna o token JWT
+            </summary>
+            <param name="Id">Identificador único do usuário</param>
+            <param name="roles">Lista de roles a serem incluídas como claims</param>
+            <returns></returns>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Providers.Autenticacao.ITokenJwtProvider.ObterIssuer">
+            <summary>
+            Issuer do JWT
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Providers.Autenticacao.ITokenJwtProvider.ObterAudience">
+            <summary>
+            Audience do JWT
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Providers.Autenticacao.ITokenJwtProvider.ObterChaveDeSegurancaSimetrica">
+            <summary>
+            SymmetricSecurityKey da chave de segurança
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:StartOnion.Camada.CrossCutting.Providers.Autenticacao.TokenJwtProvider">
+            <summary>
+            Provedor de Token JWT
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Providers.Autenticacao.TokenJwtProvider.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Construtor padrão com injeção de IConfiguration
+            </summary>
+            <param name="configuracao"></param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Providers.Autenticacao.TokenJwtProvider.GerarToken(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Retorna o token JWT
+            </summary>
+            <param name="Id">Identificador único do usuário</param>
+            <param name="roles">Lista de roles a serem incluídas como claims</param>
+            <returns></returns>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Providers.Autenticacao.TokenJwtProvider.ObterIssuer">
+            <summary>
+            Issuer do JWT
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Providers.Autenticacao.TokenJwtProvider.ObterAudience">
+            <summary>
+            Audience do JWT
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Providers.Autenticacao.TokenJwtProvider.ObterChaveDeSegurancaSimetrica">
+            <summary>
+            SymmetricSecurityKey da chave de segurança
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:StartOnion.Camada.CrossCutting.Utilidades.Compactacao.Compactador">
+            <summary>
+            Compress
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Utilidades.Compactacao.Compactador.CompactarUm(System.Byte[],System.String)">
+            <summary>
+            Compacta 1 arquivo
+            </summary>
+            <param name="arquivoEmBytes">Conteúdo do arquivo em Bytes</param>
+            <param name="caminhoDeSaidaZip"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
