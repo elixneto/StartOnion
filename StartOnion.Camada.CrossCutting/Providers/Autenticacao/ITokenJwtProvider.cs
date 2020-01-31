@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 
 namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
@@ -30,5 +31,11 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// </summary>
         /// <returns></returns>
         SymmetricSecurityKey ObterChaveDeSegurancaSimetrica();
+        /// <summary>
+        /// Obtém a data de expiração do token
+        /// </summary>
+        /// <param name="dias">Quantidade de dias para expirar</param>
+        /// <returns></returns>
+        DateTime ObterDataDeExpiracaoPorDias(int dias);
     }
 }

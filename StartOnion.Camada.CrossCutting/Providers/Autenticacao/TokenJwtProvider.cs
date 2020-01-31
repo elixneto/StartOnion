@@ -26,16 +26,11 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// <param name="configuracao"></param>
         public TokenJwtProvider(IConfiguration configuracao)
         {
-            var jwtSection = configuracao.GetSection("Jwt");
+            _chaveDeSeguranca = configuracao?.GetSection("Jwt")?["SecurityKey"];
+            _issuer = configuracao?.GetSection("Jwt")?["Issuer"];
+            _audience = configuracao?.GetSection("Jwt")?["Audience"];
 
-            if (jwtSection == default)
-                throw new JwtNaoConfiguradoException();
-
-            _chaveDeSeguranca = jwtSection["SecurityKey"];
-            _issuer = jwtSection["Issuer"];
-            _audience = jwtSection["Audience"];
-
-            if(_chaveDeSeguranca == default || _issuer == default || _audience == default)
+            if (_chaveDeSeguranca == default || _issuer == default || _audience == default)
                 throw new JwtNaoConfiguradoException();
         }
 
@@ -49,14 +44,15 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         {
             var _claimOptions = new IdentityOptions();
             var claims = new List<Claim>();
-            claims.Add(new Claim(_claimOptions.ClaimsIdentity.UserIdClaimType, Id));
-            claims.AddRange(roles.Select(r=> new Claim(ClaimTypes.Role, r)));
+            claims.Add(new Claim("sub", Id));
+            //if (roles != null)
+                claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
 
             return new JwtSecurityTokenHandler()
                         .WriteToken(new JwtSecurityToken(
                             issuer: ObterIssuer(),
                             audience: ObterAudience(),
-                            expires: DateTime.Now.AddDays(7),
+                            expires: ObterDataDeExpiracaoPorDias(7),
                             signingCredentials: ObterCredenciaisDeAssinatura(),
                             claims: claims));
         }
@@ -71,6 +67,13 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// </summary>
         /// <returns></returns>
         public string ObterAudience() => _audience;
+        /// <summary>
+        /// Obtém a data de expiração do token
+        /// </summary>
+        /// <param name="dias">Quantidade de dias para expirar</param>
+        /// <returns></returns>
+        public DateTime ObterDataDeExpiracaoPorDias(int dias)
+            => new DateTime(DateTime.Now.AddDays(dias).Year, DateTime.Now.AddDays(dias).Month, DateTime.Now.AddDays(dias).Day, 23, 59, 59);
 
         /// <summary>
         /// SymmetricSecurityKey da chave de segurança
@@ -80,6 +83,6 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
             => new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_chaveDeSeguranca));
 
         private SigningCredentials ObterCredenciaisDeAssinatura()
-            => new SigningCredentials(ObterChaveDeSegurancaSimetrica(), SecurityAlgorithms.HmacSha256Signature);
+            => new SigningCredentials(ObterChaveDeSegurancaSimetrica(), "HS256");
     }
 }

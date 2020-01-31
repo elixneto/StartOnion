@@ -15,7 +15,15 @@ namespace StartOnion.InjecaoDeDependencia
 {
     public static class InjetorDeServiceCollection
     {
-        public static IServiceCollection AddStartOnionAPI(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddStartOnionAplicacao(this IServiceCollection services, Assembly assemblyDosManipuladoresDeComando, Assembly assemblyDosMapeadores)
+        {
+            services.AddMediatR(assemblyDosManipuladoresDeComando);
+            services.AddAutoMapper(assemblyDosMapeadores);
+
+            return services;
+        }
+
+        public static IServiceCollection AddStartOnionCrossCutting(this IServiceCollection services, IConfiguration configuration)
         {
             var provedorDeTokenJwt = new TokenJwtProvider(configuration);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -32,19 +40,6 @@ namespace StartOnion.InjecaoDeDependencia
                     };
                 });
 
-            return services;
-        }
-
-        public static IServiceCollection AddStartOnionAplicacao(this IServiceCollection services, Assembly assemblyDosManipuladoresDeComando, Assembly assemblyDosMapeadores)
-        {
-            services.AddMediatR(assemblyDosManipuladoresDeComando);
-            services.AddAutoMapper(assemblyDosMapeadores);
-
-            return services;
-        }
-
-        public static IServiceCollection AddStartOnionCrossCutting(this IServiceCollection services)
-        {
             services.AddSingleton<ITokenJwtProvider, TokenJwtProvider>();
 
             services.AddScoped<INotificadorContexto, NotificadorContexto>();
