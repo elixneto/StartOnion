@@ -5,7 +5,7 @@ using System.IO.Compression;
 namespace StartOnion.Camada.CrossCutting.Utilidades.Compactacao
 {
     /// <summary>
-    /// Compress
+    /// Compressor de arquivos
     /// </summary>
     public static class Compactador
     {

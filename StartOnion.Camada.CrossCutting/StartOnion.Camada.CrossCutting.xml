@@ -4,6 +4,158 @@
         <name>StartOnion.Camada.CrossCutting</name>
     </assembly>
     <members>
+        <member name="T:StartOnion.Camada.CrossCutting.Exceptions.JwtNaoConfiguradoException">
+            <summary>
+            Exceção de JWT não configurado
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Exceptions.JwtNaoConfiguradoException.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="T:StartOnion.Camada.CrossCutting.Extensoes.Linq.ExtensoesDeLinq">
+            <summary>
+            Extensões para System.Linq
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Extensoes.Linq.ExtensoesDeLinq.SkipAndTake``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
+            <summary>
+            Faz a paginação de uma query
+            </summary>
+            <typeparam name="T">Modelo/Entidade</typeparam>
+            <param name="queryable">Query</param>
+            <param name="page">Número da página</param>
+            <param name="countPerPage">Quantidade de registros por página</param>
+            <returns></returns>
+        </member>
+        <member name="T:StartOnion.Camada.CrossCutting.Notificacoes.INotificadorContexto">
+            <summary>
+            Contexto do padrão de notificações (Notification Pattern)
+            </summary>
+        </member>
+        <member name="P:StartOnion.Camada.CrossCutting.Notificacoes.INotificadorContexto.Notificacoes">
+            <summary>
+            Lista de notificações
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.INotificadorContexto.Adicionar(System.String)">
+            <summary>
+            Adiciona uma mensagem no contexto de notificação
+            </summary>
+            <param name="mensagem">Mensagem</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.INotificadorContexto.Adicionar(System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            Adiciona uma coleção de mensagens no contexto de notificação
+            </summary>
+            <param name="mensagens">Mensagens</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.INotificadorContexto.Adicionar(System.Collections.Generic.IReadOnlyCollection{System.String})">
+            <summary>
+            Adiciona uma coleção de mensagens no contexto de notificação
+            </summary>
+            <param name="mensagens">Mensagens</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.INotificadorContexto.Adicionar(StartOnion.Camada.CrossCutting.Notificacoes.Notificavel)">
+            <summary>
+            Adiciona uma coleção de mensagens no contexto de notificação através de uma classe notificável
+            </summary>
+            <param name="modeloNotificavel">Classe que herda de Notificavel</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.INotificadorContexto.Adicionar(StartOnion.Camada.CrossCutting.Notificacoes.Notificavel[])">
+            <summary>
+            Adiciona uma coleção de mensagens no contexto de notificação através de várias classe notificáveis
+            </summary>
+            <param name="modelosNotificaveis">Classes que herdam de Notificavel</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.INotificadorContexto.PossuiNotificacoes">
+            <summary>
+            Possui notificações no contexto?
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:StartOnion.Camada.CrossCutting.Notificacoes.NotificadorContexto">
+            <summary>
+            Contexto do padrão de notificações (Notification Pattern)
+            </summary>
+        </member>
+        <member name="P:StartOnion.Camada.CrossCutting.Notificacoes.NotificadorContexto.Notificacoes">
+            <summary>
+            Lista de notificações
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.NotificadorContexto.Adicionar(System.String)">
+            <summary>
+            Adiciona uma mensagem no contexto de notificação
+            </summary>
+            <param name="mensagem">Mensagem</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.NotificadorContexto.Adicionar(System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            Adiciona uma coleção de mensagens no contexto de notificação
+            </summary>
+            <param name="mensagens">Mensagens</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.NotificadorContexto.Adicionar(System.Collections.Generic.IReadOnlyCollection{System.String})">
+            <summary>
+            Adiciona uma coleção de mensagens no contexto de notificação
+            </summary>
+            <param name="mensagens">Mensagens</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.NotificadorContexto.Adicionar(StartOnion.Camada.CrossCutting.Notificacoes.Notificavel)">
+            <summary>
+            Adiciona uma coleção de mensagens no contexto de notificação através de uma classe notificável
+            </summary>
+            <param name="notificavel">Classe que herda de Notificavel</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.NotificadorContexto.Adicionar(StartOnion.Camada.CrossCutting.Notificacoes.Notificavel[])">
+            <summary>
+            Adiciona uma coleção de mensagens no contexto de notificação através de várias classe notificáveis
+            </summary>
+            <param name="notificaveis">Classes que herdam de Notificavel</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.NotificadorContexto.PossuiNotificacoes">
+            <summary>
+            Possui notificações no contexto?
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:StartOnion.Camada.CrossCutting.Notificacoes.Notificavel">
+            <summary>
+            Classe notificável utilizando FluentValidation
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.Notificavel.AdicionarNotificacao(System.String)">
+            <summary>
+            Adiciona uma notificação na classe
+            </summary>
+            <param name="notificacao"></param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.Notificavel.AdicionarNotificacoes(System.Collections.Generic.IList{FluentValidation.Results.ValidationFailure})">
+            <summary>
+            Adiciona notificações na classe
+            </summary>
+            <param name="erros"></param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.Notificavel.EhValido">
+            <summary>
+            A classe não possui notificações?
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Notificacoes.Notificavel.ObterNotificacoes">
+            <summary>
+            Retorna as notificações
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:StartOnion.Camada.CrossCutting.Notificacoes.Validador`1">
+            <summary>
+            Validador de classes notificáveis
+            </summary>
+            <typeparam name="T">Classe notificável</typeparam>
+        </member>
         <member name="T:StartOnion.Camada.CrossCutting.Providers.Autenticacao.ITokenJwtProvider">
             <summary>
             Provedor de Token JWT
@@ -74,7 +226,7 @@
         </member>
         <member name="T:StartOnion.Camada.CrossCutting.Utilidades.Compactacao.Compactador">
             <summary>
-            Compress
+            Compressor de arquivos
             </summary>
         </member>
         <member name="M:StartOnion.Camada.CrossCutting.Utilidades.Compactacao.Compactador.CompactarUm(System.Byte[],System.String)">
@@ -83,6 +235,70 @@
             </summary>
             <param name="arquivoEmBytes">Conteúdo do arquivo em Bytes</param>
             <param name="caminhoDeSaidaZip"></param>
+            <returns></returns>
+        </member>
+        <member name="T:StartOnion.Camada.CrossCutting.Utilidades.Criptografia.CriptografiaMD5">
+            <summary>
+            Criptografia MD5
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Utilidades.Criptografia.CriptografiaMD5.ConverterTexto(System.String,System.Boolean)">
+            <summary>
+            Convert um texto em string MD5
+            </summary>
+            <param name="texto"></param>
+            <param name="maiusculo"></param>
+            <returns></returns>
+        </member>
+        <member name="T:StartOnion.Camada.CrossCutting.Utilidades.Validadores.ValidadorDeCNPJ">
+            <summary>
+            Validador de CNPJ
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Utilidades.Validadores.ValidadorDeCNPJ.#ctor(System.String)">
+            <summary>
+            Construtor padrão
+            </summary>
+            <param name="cnpj">Número do CNPJ (com ou sem másccara)</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Utilidades.Validadores.ValidadorDeCNPJ.EhValido">
+            <summary>
+            O CNPJ é válido?
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:StartOnion.Camada.CrossCutting.Utilidades.Validadores.ValidadorDeCPF">
+            <summary>
+            Validador de CPF
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Utilidades.Validadores.ValidadorDeCPF.#ctor(System.String)">
+            <summary>
+            Construtor padrão
+            </summary>
+            <param name="cpf">Número do CPF (com ou sem máscara)</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Utilidades.Validadores.ValidadorDeCPF.EhValido">
+            <summary>
+            O CPF é válido?
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:StartOnion.Camada.CrossCutting.Utilidades.Validadores.ValidadorDeEmail">
+            <summary>
+            Validador de Email
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Utilidades.Validadores.ValidadorDeEmail.#ctor(System.String)">
+            <summary>
+            Construtor pdrão
+            </summary>
+            <param name="email">Email</param>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Utilidades.Validadores.ValidadorDeEmail.EhValido">
+            <summary>
+            O Email é válido?
+            </summary>
             <returns></returns>
         </member>
     </members>

@@ -1,15 +1,26 @@
 ﻿namespace StartOnion.Camada.CrossCutting.Utilidades.Validadores
 {
+    /// <summary>
+    /// Validador de CPF
+    /// </summary>
     public class ValidadorDeCPF
     {
         private readonly string _cpf;
 
+        /// <summary>
+        /// Construtor padrão
+        /// </summary>
+        /// <param name="cpf">Número do CPF (com ou sem máscara)</param>
         public ValidadorDeCPF(string cpf)
         {
             _cpf = cpf.Trim();
             _cpf = cpf.Replace(".", "").Replace("-", "");
         }
 
+        /// <summary>
+        /// O CPF é válido?
+        /// </summary>
+        /// <returns></returns>
         public bool EhValido()
         {
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
