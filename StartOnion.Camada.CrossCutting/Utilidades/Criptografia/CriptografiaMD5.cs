@@ -9,10 +9,10 @@ namespace StartOnion.Camada.CrossCutting.Utilidades.Criptografia
     public static class CriptografiaMD5
     {
         /// <summary>
-        /// Convert um texto em string MD5
+        /// Converte um texto em string MD5
         /// </summary>
-        /// <param name="texto"></param>
-        /// <param name="maiusculo"></param>
+        /// <param name="texto">String a ser criptografada</param>
+        /// <param name="maiusculo">Retorno em maiúsculo?</param>
         /// <returns></returns>
         public static string ConverterTexto(string texto, bool maiusculo = false)
         {

@@ -24,12 +24,7 @@ namespace StartOnion.Camada.CrossCutting.Notificacoes
         /// Adiciona uma coleção de mensagens no contexto de notificação
         /// </summary>
         /// <param name="mensagens">Mensagens</param>
-        public void Adicionar(ICollection<string> mensagens) => _notificacoes.AddRange(mensagens);
-        /// <summary>
-        /// Adiciona uma coleção de mensagens no contexto de notificação
-        /// </summary>
-        /// <param name="mensagens">Mensagens</param>
-        public void Adicionar(IReadOnlyCollection<string> mensagens) => _notificacoes.AddRange(mensagens);
+        public void Adicionar(IEnumerable<string> mensagens) => _notificacoes.AddRange(mensagens);
         /// <summary>
         /// Adiciona uma coleção de mensagens no contexto de notificação através de uma classe notificável
         /// </summary>

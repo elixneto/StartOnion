@@ -24,7 +24,7 @@ namespace StartOnion.Camada.Dominio
 
         public void Validar()
         {
-            if (_validador == null)
+            if (_validador == default)
                 throw new ValidadorNaoInformadoException();
 
             AdicionarNotificacoes(_validador.Validate(this).Errors);
@@ -47,6 +47,6 @@ namespace StartOnion.Camada.Dominio
 
         public static bool operator !=(Entidade e1, Entidade e2) => !Equals(e1, e2);
 
-        private string CriarId() => Id = Id ?? Guid.NewGuid().ToString();
+        private string CriarId() => Id ??= Guid.NewGuid().ToString();
     }
 }

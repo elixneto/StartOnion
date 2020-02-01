@@ -39,8 +39,9 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// </summary>
         /// <param name="Id">Identificador único do usuário</param>
         /// <param name="roles">Lista de roles a serem incluídas como claims</param>
+        /// /// <param name="dataDeExpiracao">Data de expiração do token</param>
         /// <returns></returns>
-        public string GerarToken(string Id, IEnumerable<string> roles)
+        public string GerarToken(string Id, IEnumerable<string> roles, DateTime dataDeExpiracao)
         {
             var _claimOptions = new IdentityOptions();
             var claims = new List<Claim>();
@@ -52,7 +53,7 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
                         .WriteToken(new JwtSecurityToken(
                             issuer: ObterIssuer(),
                             audience: ObterAudience(),
-                            expires: ObterDataDeExpiracaoPorDias(7),
+                            expires: dataDeExpiracao,
                             signingCredentials: ObterCredenciaisDeAssinatura(),
                             claims: claims));
         }
@@ -67,13 +68,6 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// </summary>
         /// <returns></returns>
         public string ObterAudience() => _audience;
-        /// <summary>
-        /// Obtém a data de expiração do token
-        /// </summary>
-        /// <param name="dias">Quantidade de dias para expirar</param>
-        /// <returns></returns>
-        public DateTime ObterDataDeExpiracaoPorDias(int dias)
-            => new DateTime(DateTime.Now.AddDays(dias).Year, DateTime.Now.AddDays(dias).Month, DateTime.Now.AddDays(dias).Day, 23, 59, 59);
 
         /// <summary>
         /// SymmetricSecurityKey da chave de segurança

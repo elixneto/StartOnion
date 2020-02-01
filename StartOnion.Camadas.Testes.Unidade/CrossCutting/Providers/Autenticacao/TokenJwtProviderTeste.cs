@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Moq;
 using StartOnion.Camada.CrossCutting.Providers.Autenticacao;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Xunit;
 
 namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Providers.Autenticacao
@@ -10,35 +12,58 @@ namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Providers.Autenticacao
     public class TokenJwtProviderTeste
     {
         private string _chaveDeSeguranca = "s3cr3tk3y!!nv38RDmBPcdObV3aA3hEvw1edOOZbxBu";
+        private SymmetricSecurityKey _chaveSimetrica;
         private string _issuer = "myissuer";
         private string _audience = "myaudience";
         private string _sub = "1";
         private List<string> _roles = new List<string> { "admin" };
+        private DateTime _dataDeExpiracao = new DateTime(2020, 1, 1);
 
+        private readonly string _tokenValido = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJleHAiOjE1Nzc4NTEyMDAsImlzcyI6Im15aXNzdWVyIiwiYXVkIjoibXlhdWRpZW5jZSJ9.BShdfLm06PItIgOSS1KT01yZaimFTvcfJXpmMbdKK5Q";
         private readonly Mock<IConfiguration> _mockConfiguration = new Mock<IConfiguration>();
-
-        private readonly string _tokenValido = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJleHAiOjE1ODEwOTMyNDAsImlzcyI6Im15aXNzdWVyIiwiYXVkIjoibXlhdWRpZW5jZSJ9.tQUgR0Cjas8vozAsRTgGMRN-Uw5QJnuqvgJ7EuSM_Sw";
+        private readonly ITokenJwtProvider _provider;
 
         public TokenJwtProviderTeste()
         {
-
-        }
-
-        [Fact]
-        public void DeveGerarUmTokenJwtValido()
-        {
+            _chaveSimetrica = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_chaveDeSeguranca));
             var mockConfSection = new Mock<IConfigurationSection>();
             mockConfSection.SetupGet(m => m[It.Is<string>(s => s == "SecurityKey")]).Returns(_chaveDeSeguranca);
             mockConfSection.SetupGet(m => m[It.Is<string>(s => s == "Issuer")]).Returns(_issuer);
             mockConfSection.SetupGet(m => m[It.Is<string>(s => s == "Audience")]).Returns(_audience);
             _mockConfiguration.Setup(a => a.GetSection(It.Is<string>(s => s == "Jwt"))).Returns(mockConfSection.Object);
-            var mockProvider = new Mock<ITokenJwtProvider>();
-            var dataReferencia = new DateTime(2020, 1, 1);
-            mockProvider.Setup(s => s.ObterDataDeExpiracaoPorDias(7)).Returns(dataReferencia);
+            _provider = new TokenJwtProvider(_mockConfiguration.Object);
+        }
 
-            var tokenGerado = mockProvider.Object.GerarToken(_sub, _roles);
+        [Fact]
+        public void DeveGerarUmTokenJwtValido()
+        {
+            var tokenGerado = _provider.GerarToken(_sub, _roles, _dataDeExpiracao);
 
             Assert.Equal(_tokenValido, tokenGerado);
+        }
+
+        [Fact]
+        public void DeveRetornarOIssuerCorreto()
+        {
+            var issuerRetornado = _provider.ObterIssuer();
+
+            Assert.Equal(_issuer, issuerRetornado);
+        }
+
+        [Fact]
+        public void DeveRetornarOAudienceCorreto()
+        {
+            var audienceRetornado = _provider.ObterAudience();
+
+            Assert.Equal(_audience, audienceRetornado);
+        }
+
+        [Fact(Skip = "new SymmetricSecurityKey sempre retorna uma chave diferente")]
+        public void DeveRetornarAChaveDeSegurancaSimetricaCorreta()
+        {
+            var chaveSimetricaRetornada = _provider.ObterChaveDeSegurancaSimetrica();
+
+            Assert.Equal(_chaveSimetrica, chaveSimetricaRetornada);
         }
     }
 }

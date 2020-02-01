@@ -14,8 +14,9 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// </summary>
         /// <param name="Id">Identificador único do usuário</param>
         /// <param name="roles">Lista de roles a serem incluídas como claims</param>
+        /// /// <param name="dataDeExpiracao">Data de expiração do token</param>
         /// <returns></returns>
-        string GerarToken(string Id, IEnumerable<string> roles);
+        string GerarToken(string Id, IEnumerable<string> roles, DateTime dataDeExpiracao);
         /// <summary>
         /// Issuer do JWT
         /// </summary>
@@ -31,11 +32,5 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// </summary>
         /// <returns></returns>
         SymmetricSecurityKey ObterChaveDeSegurancaSimetrica();
-        /// <summary>
-        /// Obtém a data de expiração do token
-        /// </summary>
-        /// <param name="dias">Quantidade de dias para expirar</param>
-        /// <returns></returns>
-        DateTime ObterDataDeExpiracaoPorDias(int dias);
     }
 }

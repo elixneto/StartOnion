@@ -1,11 +1,19 @@
 ﻿using FluentValidation;
 using StartOnion.Camada.CrossCutting.Notificacoes;
+using StartOnion.Camada.Dominio.Exceptions;
 using System;
 
 namespace StartOnion.Camada.Dominio
 {
     public abstract class ObjetoDeValor<T> : Notificavel, IEquatable<T> where T : ObjetoDeValor<T>
     {
+        private readonly IValidator _validador;
+        public ObjetoDeValor() { }
+        public ObjetoDeValor(IValidator validador)
+        {
+            _validador = validador;
+        }
+
         public override bool Equals(object objeto) => this.Equals(objeto as T);
         public virtual bool Equals(T outroObjeto)
         {
@@ -34,6 +42,12 @@ namespace StartOnion.Camada.Dominio
 
         public abstract bool PropriedadesIguais(T outroObjeto);
 
-        public void Validar(IValidator validador) => base.AdicionarNotificacoes(validador.Validate(this).Errors);
+        public void Validar()
+        {
+            if (_validador == null)
+                throw new ValidadorNaoInformadoException();
+
+            AdicionarNotificacoes(_validador.Validate(this).Errors);
+        }
     }
 }
