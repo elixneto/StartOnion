@@ -5,12 +5,13 @@
     /// </summary>
     public sealed class PaginacaoParametro
     {
+        private uint _pagina = 1;
         private uint _quantidadePorPagina = 100;
 
         /// <summary>
         /// Número da página
         /// </summary>
-        public uint Pagina { get; set; }
+        public uint Pagina { get => _pagina; set { if (value < 1) _pagina = 1; } }
         /// <summary>
         /// Quantidade de registros por página (máximo 100)
         /// </summary>
