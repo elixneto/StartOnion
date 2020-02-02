@@ -51,6 +51,7 @@ namespace StartOnion.InjecaoDeDependencia
         {
             services.AddSingleton<IDocumentStore>(new ConfiguracaoDoBancoDeDados(urlDoBanco, nomeDoBanco, mapeadorDeColecoes).DocumentStore);
             services.AddScoped<BancoDeDadosContexto>();
+            services.AddScoped<QueryContexto>();
 
             return services;
         }

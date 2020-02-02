@@ -14,7 +14,7 @@ namespace StartOnion.Camada.CrossCutting.Seguranca
         /// </summary>
         /// <param name="tamanho">Quantidade de caracteres gerados</param>
         /// <returns></returns>
-        public static byte[] GerarSalt(int tamanho)
+        public static byte[] GerarSaltEmBytes(int tamanho)
         {
             const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
             StringBuilder res = new StringBuilder();
@@ -34,13 +34,29 @@ namespace StartOnion.Camada.CrossCutting.Seguranca
         }
 
         /// <summary>
-        /// Gera um hash a partir de um texto e um salt
+        /// Gera um Hash e um novo salt
         /// </summary>
-        /// <param name="textoEmBytes">Texto em bytes</param>
-        /// <param name="saltEmBytes">Salt em bytes</param>
-        /// <returns></returns>
-        public static byte[] GerarSaltedHashSHA256(byte[] textoEmBytes, byte[] saltEmBytes)
+        /// <param name="texto"></param>
+        /// <param name="tamanhoDoSalt"></param>
+        /// <returns>Hash, Salt</returns>
+        public static Tuple<string, string> GerarSaltedHashSHA512(string texto, int tamanhoDoSalt)
         {
+            var saltEmBytes = GerarSaltEmBytes(tamanhoDoSalt);
+            return GerarSHA512(texto, saltEmBytes);
+        }
+        /// <summary>
+        /// Gera um Hash com um salt já existente
+        /// </summary>
+        /// <param name="texto"></param>
+        /// <param name="saltEmBytes"></param>
+        /// <returns></returns>
+        public static Tuple<string, string> GerarSaltedHashSHA512(string texto, byte[] saltEmBytes)
+            => GerarSHA512(texto, saltEmBytes);
+
+
+        private static Tuple<string, string> GerarSHA512(string texto, byte[] saltEmBytes)
+        {
+            var textoEmBytes = Encoding.UTF8.GetBytes(texto);
             var textoComSaltEmBytes = new byte[textoEmBytes.Length + saltEmBytes.Length];
 
             for (int i = 0; i < textoEmBytes.Length; i++)
@@ -49,7 +65,7 @@ namespace StartOnion.Camada.CrossCutting.Seguranca
             for (int i = 0; i < saltEmBytes.Length; i++)
                 textoComSaltEmBytes[textoEmBytes.Length + i] = saltEmBytes[i];
 
-            return new SHA256Managed().ComputeHash(textoComSaltEmBytes);
+            return new Tuple<string, string>(Convert.ToBase64String(new SHA512Managed().ComputeHash(textoComSaltEmBytes)), Encoding.UTF8.GetString(saltEmBytes));
         }
     }
 }
