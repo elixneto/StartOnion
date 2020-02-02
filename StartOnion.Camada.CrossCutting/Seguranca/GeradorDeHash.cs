@@ -50,8 +50,8 @@ namespace StartOnion.Camada.CrossCutting.Seguranca
         /// <param name="texto"></param>
         /// <param name="saltEmBytes"></param>
         /// <returns></returns>
-        public static Tuple<string, string> GerarSaltedHashSHA512(string texto, byte[] saltEmBytes)
-            => GerarSHA512(texto, saltEmBytes);
+        public static string GerarSaltedHashSHA512(string texto, byte[] saltEmBytes)
+            => GerarSHA512(texto, saltEmBytes).Item1;
 
 
         private static Tuple<string, string> GerarSHA512(string texto, byte[] saltEmBytes)
