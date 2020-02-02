@@ -25,12 +25,12 @@ namespace StartOnion.Camada.CrossCutting.Notificacoes
         /// <summary>
         /// Adiciona uma coleção de mensagens no contexto de notificação
         /// </summary>
-        /// <param name="mensagens">Mensagens</param>
+        /// <param name="modeloNotificavel">Classe que herda de <code>Notificavel</code></param>
         void Adicionar(Notificavel modeloNotificavel);
         /// <summary>
         /// Adiciona uma coleção de mensagens no contexto de notificação através de várias classe notificáveis
         /// </summary>
-        /// <param name="modelosNotificaveis">Classes que herdam de Notificavel</param>
+        /// <param name="modelosNotificaveis">Classes que herdam de <code>Notificavel</code></param>
         void Adicionar(params Notificavel[] modelosNotificaveis);
 
         /// <summary>

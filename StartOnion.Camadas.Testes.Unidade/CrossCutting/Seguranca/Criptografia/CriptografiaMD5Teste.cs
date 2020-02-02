@@ -1,7 +1,7 @@
-﻿using StartOnion.Camada.CrossCutting.Utilidades.Criptografia;
+﻿using StartOnion.Camada.CrossCutting.Utilidades.Seguranca;
 using Xunit;
 
-namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Utilidades.Criptografia
+namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Seguranca.Criptografia
 {
     public class CriptografiaMD5Teste
     {

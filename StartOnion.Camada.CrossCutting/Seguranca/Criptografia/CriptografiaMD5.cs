@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace StartOnion.Camada.CrossCutting.Utilidades.Criptografia
+namespace StartOnion.Camada.CrossCutting.Utilidades.Seguranca
 {
     /// <summary>
     /// Criptografia MD5
