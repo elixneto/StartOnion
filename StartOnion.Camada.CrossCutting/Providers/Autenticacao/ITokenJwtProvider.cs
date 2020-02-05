@@ -21,7 +21,7 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// <param name="Id">Identificador único do usuário</param>
         /// <param name="dataDeExpiracao">Data de expiração do token</param>
         /// <returns></returns>
-        string GerarToken(string Id, DateTime? dataDeExpiracao);
+        string GerarToken(string Id, DateTime? dataDeExpiracao = null);
         /// <summary>
         /// Retorna o token JWT
         /// </summary>
@@ -29,7 +29,7 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// <param name="roles">Lista de roles a serem incluídas como claims</param>
         /// /// <param name="dataDeExpiracao">Data de expiração do token</param>
         /// <returns></returns>
-        string GerarToken(string Id, IEnumerable<string> roles, DateTime? dataDeExpiracao);
+        string GerarToken(string Id, IEnumerable<string> roles, DateTime? dataDeExpiracao = null);
         /// <summary>
         /// Retorna o token JWT
         /// </summary>
@@ -38,7 +38,7 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// <param name="roles">Lista de roles a serem incluídas como claims</param>
         /// <param name="dataDeExpiracao">Data de expiração do token</param>
         /// <returns></returns>
-        string GerarToken(string Id, IDictionary<string, string> claimsPersonalizados, IEnumerable<string> roles, DateTime? dataDeExpiracao);
+        string GerarToken(string Id, IDictionary<string, string> claimsPersonalizados, IEnumerable<string> roles, DateTime? dataDeExpiracao = null);
         /// <summary>
         /// Issuer do JWT
         /// </summary>

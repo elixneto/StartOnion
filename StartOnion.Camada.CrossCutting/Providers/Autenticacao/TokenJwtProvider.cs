@@ -47,7 +47,7 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// <param name="Id">Identificador único do usuário</param>
         /// <param name="dataDeExpiracao">Data de expiração do token</param>
         /// <returns></returns>
-        public string GerarToken(string Id, DateTime? dataDeExpiracao)
+        public string GerarToken(string Id, DateTime? dataDeExpiracao = null)
             => GerarTokenJwt(Id, null, null, dataDeExpiracao);
         /// <summary>
         /// Retorna o token JWT
@@ -56,7 +56,7 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// <param name="roles">Lista de roles a serem incluídas como claims</param>
         /// /// <param name="dataDeExpiracao">Data de expiração do token</param>
         /// <returns></returns>
-        public string GerarToken(string Id, IEnumerable<string> roles, DateTime? dataDeExpiracao)
+        public string GerarToken(string Id, IEnumerable<string> roles, DateTime? dataDeExpiracao = null)
             => GerarTokenJwt(Id, null, roles, dataDeExpiracao);
         /// <summary>
         /// Retorna o token JWT
@@ -66,11 +66,11 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// <param name="roles">Lista de roles a serem incluídas como claims</param>
         /// <param name="dataDeExpiracao">Data de expiração do token</param>
         /// <returns></returns>
-        public string GerarToken(string Id, IDictionary<string, string> claimsPersonalizados, IEnumerable<string> roles, DateTime? dataDeExpiracao)
+        public string GerarToken(string Id, IDictionary<string, string> claimsPersonalizados, IEnumerable<string> roles, DateTime? dataDeExpiracao = null)
             => GerarTokenJwt(Id, claimsPersonalizados, roles, dataDeExpiracao);
         
 
-        private string GerarTokenJwt(string Id, IDictionary<string, string> customClaims, IEnumerable<string> roles, DateTime? dataDeExpiracao)
+        private string GerarTokenJwt(string Id, IDictionary<string, string> customClaims, IEnumerable<string> roles, DateTime? dataDeExpiracao = null)
         {
             var _claimOptions = new IdentityOptions();
             var claims = new List<Claim>
