@@ -31,6 +31,8 @@ namespace StartOnion.InjecaoDeDependencia
                 {
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
+                        RequireSignedTokens = true,
+                        RequireExpirationTime = false,
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateIssuerSigningKey = true,
