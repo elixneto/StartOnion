@@ -1,6 +1,4 @@
 ﻿using StartOnion.Camada.CrossCutting.Seguranca;
-using System;
-using System.Text;
 using Xunit;
 
 namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Seguranca
@@ -10,7 +8,7 @@ namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Seguranca
         [Fact]
         public void DeveGerarUmSaltCom12Caracteres()
         {
-            var salt = GeradorDeHash.GerarSaltEmBytes(12);
+            var salt = GeradorDeSalt.Gerar(12);
 
             Assert.Equal(12, salt.Length);
         }

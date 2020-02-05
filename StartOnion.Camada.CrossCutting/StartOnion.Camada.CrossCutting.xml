@@ -178,7 +178,7 @@
             Retorna o token JWT
             </summary>
             <param name="Id">Identificador único do usuário</param>
-            <param name="customClaims">Claims personalizados</param>
+            <param name="claimsPersonalizados">Claims personalizados</param>
             <param name="roles">Lista de roles a serem incluídas como claims</param>
             <param name="dataDeExpiracao">Data de expiração do token</param>
             <returns></returns>
@@ -241,7 +241,7 @@
             Retorna o token JWT
             </summary>
             <param name="Id">Identificador único do usuário</param>
-            <param name="customClaims">Claims personalizados</param>
+            <param name="claimsPersonalizados">Claims personalizados</param>
             <param name="roles">Lista de roles a serem incluídas como claims</param>
             <param name="dataDeExpiracao">Data de expiração do token</param>
             <returns></returns>
@@ -347,32 +347,67 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:StartOnion.Camada.CrossCutting.Seguranca.GeradorDeHash">
+        <member name="T:StartOnion.Camada.CrossCutting.Seguranca.Criptografia.CriptografiaScrypt">
             <summary>
-            Gerador de salt
+            Criptografia Scrypt
             </summary>
         </member>
-        <member name="M:StartOnion.Camada.CrossCutting.Seguranca.GeradorDeHash.GerarSaltEmBytes(System.Int32)">
+        <member name="M:StartOnion.Camada.CrossCutting.Seguranca.Criptografia.CriptografiaScrypt.CriptografarSenha(System.String,System.String)">
             <summary>
-            Gera um salt
+            Retorna o hash de criptografia
             </summary>
-            <param name="tamanho">Quantidade de caracteres gerados</param>
+            <param name="senha">Senha para ser criptografada</param>
+            <param name="salt">Salt</param>
             <returns></returns>
         </member>
-        <member name="M:StartOnion.Camada.CrossCutting.Seguranca.GeradorDeHash.GerarSaltedHashSHA512(System.String,System.Int32)">
+        <member name="M:StartOnion.Camada.CrossCutting.Seguranca.Criptografia.CriptografiaScrypt.CriptografarTexto(System.String)">
             <summary>
-            Gera um Hash e um novo salt
+            Retorna o hash de criptografia
             </summary>
-            <param name="texto"></param>
-            <param name="tamanhoDoSalt"></param>
-            <returns>Hash, Salt</returns>
+            <param name="texto">Texto para ser criptografado</param>
+            <returns></returns>
         </member>
-        <member name="M:StartOnion.Camada.CrossCutting.Seguranca.GeradorDeHash.GerarSaltedHashSHA512(System.String,System.Byte[])">
+        <member name="M:StartOnion.Camada.CrossCutting.Seguranca.Criptografia.CriptografiaScrypt.ValidarSenhaComHash(System.String,System.String,System.String)">
             <summary>
-            Gera um Hash com um salt já existente
+            Retorna <code>true</code> ou <code>false</code> se a senha é o hash
             </summary>
-            <param name="texto"></param>
-            <param name="saltEmBytes"></param>
+            <param name="senha">Senha em plain text a ser verificada</param>
+            <param name="salt">Salt da senha</param>
+            <param name="hash">Hash a ser verificado</param>
+            <returns></returns>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Seguranca.Criptografia.CriptografiaScrypt.ValidarTextoComHash(System.String,System.String)">
+            <summary>
+            Retorna <code>true</code> ou <code>false</code> se o texto é o hash
+            </summary>
+            <param name="texto">Texto em plain text a ser verificado</param>
+            <param name="hash">Hash a ser verificado</param>
+            <returns></returns>
+        </member>
+        <member name="T:StartOnion.Camada.CrossCutting.Seguranca.GeradorDeSalt">
+            <summary>
+            Gerador de salt (baseado em <code>RNGCryptoServiceProvider</code>)
+            </summary>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Seguranca.GeradorDeSalt.Gerar(System.Int32)">
+            <summary>
+            Gera um salt aleatório e retorna em string
+            </summary>
+            <param name="tamanho">Tamanho do salt</param>
+            <returns></returns>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Seguranca.GeradorDeSalt.GerarEmBytes(System.Int32)">
+            <summary>
+            Gera um salt aleatório e retorna em bytes
+            </summary>
+            <param name="tamanho">Tamanho do salt</param>
+            <returns></returns>
+        </member>
+        <member name="M:StartOnion.Camada.CrossCutting.Seguranca.GeradorDeSalt.GerarEmBase64(System.Int32)">
+            <summary>
+            Gera um salt aleatório e retorna em string codificado em Base64
+            </summary>
+            <param name="tamanho">Tamanho do salt</param>
             <returns></returns>
         </member>
     </members>

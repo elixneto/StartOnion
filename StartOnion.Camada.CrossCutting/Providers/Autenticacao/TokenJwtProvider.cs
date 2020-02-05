@@ -62,7 +62,7 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// Retorna o token JWT
         /// </summary>
         /// <param name="Id">Identificador único do usuário</param>
-        /// <param name="customClaims">Claims personalizados</param>
+        /// <param name="claimsPersonalizados">Claims personalizados</param>
         /// <param name="roles">Lista de roles a serem incluídas como claims</param>
         /// <param name="dataDeExpiracao">Data de expiração do token</param>
         /// <returns></returns>
@@ -73,8 +73,10 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         private string GerarTokenJwt(string Id, IDictionary<string, string> customClaims, IEnumerable<string> roles, DateTime? dataDeExpiracao)
         {
             var _claimOptions = new IdentityOptions();
-            var claims = new List<Claim>();
-            claims.Add(new Claim("sub", Id));
+            var claims = new List<Claim>
+            {
+                new Claim("sub", Id)
+            };
             if (customClaims != null)
                 claims.AddRange(customClaims.Select(c => new Claim(c.Key, c.Value)));
             if (roles != null)

@@ -34,7 +34,7 @@ namespace StartOnion.Camada.CrossCutting.Providers.Autenticacao
         /// Retorna o token JWT
         /// </summary>
         /// <param name="Id">Identificador único do usuário</param>
-        /// <param name="customClaims">Claims personalizados</param>
+        /// <param name="claimsPersonalizados">Claims personalizados</param>
         /// <param name="roles">Lista de roles a serem incluídas como claims</param>
         /// <param name="dataDeExpiracao">Data de expiração do token</param>
         /// <returns></returns>
