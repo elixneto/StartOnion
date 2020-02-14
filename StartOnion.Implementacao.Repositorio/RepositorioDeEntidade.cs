@@ -1,4 +1,5 @@
 ﻿using StartOnion.Camada.Dominio.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace StartOnion.Implementacao.Repositorio
@@ -20,7 +21,7 @@ namespace StartOnion.Implementacao.Repositorio
                 this.Adicionar(entidade);
         }
 
-        public virtual TEntity ObterPorId(string id) => _contexto.Sessao.Load<TEntity>(id);
+        public virtual TEntity ObterPorId(Guid id) => _contexto.Sessao.Load<TEntity>(id.ToString());
 
         public virtual void Remover(TEntity entidade) => _contexto.Sessao.Delete(entidade);
 
