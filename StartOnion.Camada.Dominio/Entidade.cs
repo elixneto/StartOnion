@@ -8,18 +8,27 @@ namespace StartOnion.Camada.Dominio
     public abstract class Entidade : Notificavel
     {
         public Guid Id { get; protected set; }
+        public DateTimeOffset DataEHoraDeCriacao { get; }
 
         private readonly IValidator _validador;
 
         public Entidade()
         {
             CriarId();
+            DataEHoraDeCriacao = DateTimeOffset.Now;
+        }
+
+        public Entidade(Guid id)
+        {
+            Id = id;
+            DataEHoraDeCriacao = DateTimeOffset.Now;
         }
 
         public Entidade(IValidator validador)
         {
             CriarId();
             _validador = validador;
+            DataEHoraDeCriacao = DateTimeOffset.Now;
         }
 
         public void Validar()
