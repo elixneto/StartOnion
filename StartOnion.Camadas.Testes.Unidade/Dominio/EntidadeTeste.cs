@@ -15,7 +15,7 @@ namespace StartOnion.Camadas.Testes.Unidade.Dominio
         {
             var id = new MinhaEntidade().Id;
 
-            Assert.True(Guid.TryParse(id, out _));
+            Assert.True(id.GetType().IsAssignableFrom(typeof(Guid)));
         }
 
         [Fact]
@@ -26,6 +26,14 @@ namespace StartOnion.Camadas.Testes.Unidade.Dominio
 
             Assert.Throws<ValidadorNaoInformadoException>(actSemConstrutor);
             Assert.Throws<ValidadorNaoInformadoException>(actComConstrutor);
+        }
+
+        [Fact]
+        public void DeveGerarUmNovoGuidSempreQueInstanciarUmaNovaClasse()
+        {
+            var minhaEntidade = new MinhaEntidade();
+
+            Assert.False(minhaEntidade.Id == default);
         }
     }
 }

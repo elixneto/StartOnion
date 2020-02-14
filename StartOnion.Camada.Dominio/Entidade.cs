@@ -7,7 +7,7 @@ namespace StartOnion.Camada.Dominio
 {
     public abstract class Entidade : Notificavel
     {
-        public string Id { get; protected set; }
+        public Guid Id { get; protected set; }
 
         private readonly IValidator _validador;
 
@@ -42,11 +42,10 @@ namespace StartOnion.Camada.Dominio
         }
 
         public override int GetHashCode() => Id.GetHashCode();
-
         public static bool operator ==(Entidade e1, Entidade e2) => Equals(e1, e2);
-
         public static bool operator !=(Entidade e1, Entidade e2) => !Equals(e1, e2);
 
-        private string CriarId() => Id ??= Guid.NewGuid().ToString();
+        private Guid CriarId() => Id = EhTransiente() ? Guid.NewGuid() : Id;
+        private bool EhTransiente() => (Id == default || Id == null);
     }
 }
