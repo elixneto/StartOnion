@@ -1,14 +1,15 @@
-﻿using StartOnion.Camada.Dominio.Interfaces;
+﻿using StartOnion.Camada.Dominio;
+using StartOnion.Camada.Dominio.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace StartOnion.Implementacao.Repositorio
+namespace StartOnion.Implementacao.Repositorio.RavenDB
 {
-    public abstract class RepositorioDeEntidade<TEntity> : IRepositorioDeEntidade<TEntity>
+    public abstract class RepositorioDeEntidadeRavenDB<TEntity> : IRepositorioDeEntidade<TEntity> where TEntity : Entidade
     {
-        public readonly BancoDeDadosContexto _contexto;
+        public readonly ContextoRepositorioRavenDB _contexto;
 
-        protected RepositorioDeEntidade(BancoDeDadosContexto contexto)
+        protected RepositorioDeEntidadeRavenDB(ContextoRepositorioRavenDB contexto)
         {
             _contexto = contexto;
         }

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CollectionMapper.RavenDB.NetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +7,9 @@ using Microsoft.IdentityModel.Tokens;
 using Raven.Client.Documents;
 using StartOnion.Camada.CrossCutting.Notificacoes;
 using StartOnion.Camada.CrossCutting.Providers.Autenticacao;
-using StartOnion.Implementacao.Repositorio;
+using StartOnion.Implementacao.Repositorio.LiteDB;
+using StartOnion.Implementacao.Repositorio.RavenDB;
+using StartOnion.InjecaoDeDependencia.Exceptions;
 using System.Reflection;
 
 namespace StartOnion.InjecaoDeDependencia
@@ -49,11 +50,44 @@ namespace StartOnion.InjecaoDeDependencia
             return services;
         }
 
-        public static IServiceCollection AddStartOnionRepositorio(this IServiceCollection services, string urlDoBanco, string nomeDoBanco, CollectionMapperRavenDB mapeadorDeColecoes)
+        public static IServiceCollection AddStartOnionRepositorio(this IServiceCollection services, ConfiguracoesDoBancoDeDados configuracoesDoBancoDeDados)
         {
-            services.AddSingleton<IDocumentStore>(new ConfiguracaoDoBancoDeDados(urlDoBanco, nomeDoBanco, mapeadorDeColecoes).DocumentStore);
-            services.AddScoped<BancoDeDadosContexto>();
-            services.AddScoped<QueryContexto>();
+            if (configuracoesDoBancoDeDados == default)
+                throw new ConfiguracoesDoBancoDeDadosException();
+
+            if (configuracoesDoBancoDeDados.UseRavenDB)
+                services.InjetarRavenDB(configuracoesDoBancoDeDados);
+
+            if (configuracoesDoBancoDeDados.UseLiteDB)
+                services.InjetarLiteDB(configuracoesDoBancoDeDados);
+
+            return services;
+        }
+
+        private static IServiceCollection InjetarRavenDB(this IServiceCollection services, ConfiguracoesDoBancoDeDados configuracoes)
+        {
+            if (configuracoes.UrlDoBanco == default)
+                throw new UrlDoBancoDeDadosNaoInformadoException();
+            if (configuracoes.NomeDoBanco == default)
+                throw new NomeDoBancoDeDadosNaoInformadoException();
+            if (configuracoes.MapeadorDeColecoesRavenDB == default)
+                throw new MapeadorDeColecoesDoRavenDBNaoInformadoException();
+
+            services.AddSingleton<IDocumentStore>(new ConfiguracaoRavenDB(configuracoes.UrlDoBanco,
+                                                                          configuracoes.NomeDoBanco,
+                                                                          configuracoes.MapeadorDeColecoesRavenDB).DocumentStore);
+            services.AddScoped<ContextoRepositorioRavenDB>();
+            services.AddScoped<ContextoQueryRavenDB>();
+
+            return services;
+        }
+        private static IServiceCollection InjetarLiteDB(this IServiceCollection services, ConfiguracoesDoBancoDeDados configuracoes)
+        {
+            if (configuracoes.ConexaoLiteDB == default)
+                throw new ConexaoDoLiteDBNaoInformadaException();
+
+            services.AddSingleton(new ConfiguracaoLiteDB(configuracoes.ConexaoLiteDB));
+            services.AddScoped<ContextoRepositorioLiteDB>();
 
             return services;
         }

@@ -1,13 +1,13 @@
 ﻿using CollectionMapper.RavenDB.NetCore.Interfaces;
 using Raven.Client.Documents;
 
-namespace StartOnion.Implementacao.Repositorio
+namespace StartOnion.Implementacao.Repositorio.RavenDB
 {
-    public sealed class ConfiguracaoDoBancoDeDados
+    public sealed class ConfiguracaoRavenDB
     {
         public DocumentStore DocumentStore { get; }
 
-        public ConfiguracaoDoBancoDeDados(string urlDoBanco, string nomeDoBanco, ICollectionMapperRavenDB mapeador)
+        public ConfiguracaoRavenDB(string urlDoBanco, string nomeDoBanco, ICollectionMapperRavenDB mapeador)
         {
             mapeador.IncludeNonPublicProperties();
 
