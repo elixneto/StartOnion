@@ -4,9 +4,14 @@
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <Version>3.0.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Description></Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/elixneto/StartOnion</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
+    <Authors>elixneto</Authors>
+    <Company />
+    <Product />
+    <Description>Cross Cutting Layer for Onion Architecture</Description>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
