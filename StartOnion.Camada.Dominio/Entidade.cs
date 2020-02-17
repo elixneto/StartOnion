@@ -8,14 +8,13 @@ namespace StartOnion.Camada.Dominio
     public abstract class Entidade : Notificavel
     {
         public Guid Id { get; protected set; }
-        public DateTimeOffset DataEHoraDeCriacao { get; }
+        public DateTimeOffset DataEHoraDeCriacao { get; protected set; }
 
         private readonly IValidator _validador;
 
         public Entidade()
         {
-            CriarId();
-            DataEHoraDeCriacao = DateTimeOffset.Now;
+            CriarPropriedades();
         }
 
         public Entidade(Guid id)
@@ -26,9 +25,8 @@ namespace StartOnion.Camada.Dominio
 
         public Entidade(IValidator validador)
         {
-            CriarId();
+            CriarPropriedades();
             _validador = validador;
-            DataEHoraDeCriacao = DateTimeOffset.Now;
         }
 
         public void Validar()
@@ -54,7 +52,9 @@ namespace StartOnion.Camada.Dominio
         public static bool operator ==(Entidade e1, Entidade e2) => Equals(e1, e2);
         public static bool operator !=(Entidade e1, Entidade e2) => !Equals(e1, e2);
 
-        private Guid CriarId() => Id = EhTransiente() ? Guid.NewGuid() : Id;
-        private bool EhTransiente() => (Id == default || Id == null);
+        private void CriarPropriedades() {
+            Id = Guid.NewGuid();
+            DataEHoraDeCriacao = DateTimeOffset.Now;
+        }
     }
 }
