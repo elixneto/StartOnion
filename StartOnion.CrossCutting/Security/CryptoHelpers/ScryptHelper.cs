@@ -9,7 +9,7 @@ namespace StartOnion.CrossCutting.Security.CryptoHelpers
     {
         private const int BLOCK = 8;
         private const int THREADS = 8;
-        private const int CUST = 16384;
+        private const int COST = 16384;
 
         /// <summary>
         /// Get crypto hash
@@ -18,14 +18,14 @@ namespace StartOnion.CrossCutting.Security.CryptoHelpers
         /// <param name="salt"></param>
         /// <returns></returns>
         public static string CryptPassword(string pass, string salt)
-            => new ScryptEncoder(CUST, BLOCK, THREADS).Encode(GetPattern(pass, salt));
+            => new ScryptEncoder(COST, BLOCK, THREADS).Encode(GetPattern(pass, salt));
         /// <summary>
         /// Get crypto hash
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
         public static string CryptText(string text)
-            => new ScryptEncoder(CUST, BLOCK, THREADS).Encode(text);
+            => new ScryptEncoder(COST, BLOCK, THREADS).Encode(text);
 
         /// <summary>
         /// validate password with salt and hash
@@ -35,7 +35,7 @@ namespace StartOnion.CrossCutting.Security.CryptoHelpers
         /// <param name="hash"></param>
         /// <returns></returns>
         public static bool ValidatePassword(string pass, string salt, string hash)
-            => new ScryptEncoder(CUST, BLOCK, THREADS).Compare(GetPattern(pass, salt), hash);
+            => new ScryptEncoder(COST, BLOCK, THREADS).Compare(GetPattern(pass, salt), hash);
         /// <summary>
         /// validate text with hash
         /// </summary>
@@ -43,7 +43,7 @@ namespace StartOnion.CrossCutting.Security.CryptoHelpers
         /// <param name="hash">Hash a ser verificado</param>
         /// <returns></returns>
         public static bool ValidateText(string text, string hash)
-            => new ScryptEncoder(CUST, BLOCK, THREADS).Compare(text, hash);
+            => new ScryptEncoder(COST, BLOCK, THREADS).Compare(text, hash);
 
         private static string GetPattern(string text, string salt)
             => $"0n10n.{text}..{salt}.S4LT";
