@@ -4,18 +4,24 @@ namespace StartOnion.InjecaoDeDependencia
 {
     public sealed class ConfiguracoesDoBancoDeDados
     {
-        public bool UseRavenDB { get; }
-        public bool UseLiteDB { get; }
-        public string UrlDoBanco { get; set; }
-        public string NomeDoBanco { get; set; }
-
-        public CollectionMapperRavenDB MapeadorDeColecoesRavenDB { get; set; }
-        public string ConexaoLiteDB { get; set; }
-
-        public ConfiguracoesDoBancoDeDados(bool useRavenDB, bool useLiteDB)
+        public bool IsUsingRavenDB { get; private set; } = false;
+        public string UrlDoBancoRavenDB { get; private set; }
+        public string NomeDoBancoRavenDB { get; private set; }
+        public CollectionMapperRavenDB MapeadorDeColecoesRavenDB { get; private set; }
+        public void UseRavenDB(string urlDoBanco, string nomeDoBanco, CollectionMapperRavenDB mapeadorDeColecoes)
         {
-            UseRavenDB = useRavenDB;
-            UseLiteDB = useLiteDB;
+            IsUsingRavenDB = true;
+            UrlDoBancoRavenDB = urlDoBanco;
+            NomeDoBancoRavenDB = nomeDoBanco;
+            MapeadorDeColecoesRavenDB = mapeadorDeColecoes;
+        }
+
+        public bool IsUsingLiteDB { get; private set; } = false;
+        public string ConexaoLiteDB { get; private set; }
+        public void UseLiteDB(string caminhoDoArquivo)
+        {
+            IsUsingLiteDB = true;
+            ConexaoLiteDB = caminhoDoArquivo;
         }
     }
 }

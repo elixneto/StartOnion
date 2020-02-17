@@ -44,7 +44,6 @@ namespace StartOnion.InjecaoDeDependencia
                 });
 
             services.AddSingleton<ITokenJwtProvider, TokenJwtProvider>();
-
             services.AddScoped<INotificadorContexto, NotificadorContexto>();
 
             return services;
@@ -55,10 +54,10 @@ namespace StartOnion.InjecaoDeDependencia
             if (configuracoesDoBancoDeDados == default)
                 throw new ConfiguracoesDoBancoDeDadosException();
 
-            if (configuracoesDoBancoDeDados.UseRavenDB)
+            if (configuracoesDoBancoDeDados.IsUsingRavenDB)
                 services.InjetarRavenDB(configuracoesDoBancoDeDados);
 
-            if (configuracoesDoBancoDeDados.UseLiteDB)
+            if (configuracoesDoBancoDeDados.IsUsingLiteDB)
                 services.InjetarLiteDB(configuracoesDoBancoDeDados);
 
             return services;
@@ -66,15 +65,15 @@ namespace StartOnion.InjecaoDeDependencia
 
         private static IServiceCollection InjetarRavenDB(this IServiceCollection services, ConfiguracoesDoBancoDeDados configuracoes)
         {
-            if (configuracoes.UrlDoBanco == default)
+            if (configuracoes.UrlDoBancoRavenDB == default)
                 throw new UrlDoBancoDeDadosNaoInformadoException();
-            if (configuracoes.NomeDoBanco == default)
+            if (configuracoes.NomeDoBancoRavenDB == default)
                 throw new NomeDoBancoDeDadosNaoInformadoException();
             if (configuracoes.MapeadorDeColecoesRavenDB == default)
                 throw new MapeadorDeColecoesDoRavenDBNaoInformadoException();
 
-            services.AddSingleton<IDocumentStore>(new ConfiguracaoRavenDB(configuracoes.UrlDoBanco,
-                                                                          configuracoes.NomeDoBanco,
+            services.AddSingleton<IDocumentStore>(new ConfiguracaoRavenDB(configuracoes.UrlDoBancoRavenDB,
+                                                                          configuracoes.NomeDoBancoRavenDB,
                                                                           configuracoes.MapeadorDeColecoesRavenDB).DocumentStore);
             services.AddScoped<ContextoRepositorioRavenDB>();
             services.AddScoped<ContextoQueryRavenDB>();
