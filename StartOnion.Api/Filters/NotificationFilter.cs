@@ -10,9 +10,9 @@ namespace StartOnion.Api.Filters
     {
         private readonly INotificationContext _notificator;
 
-        public NotificationFilter(INotificationContext notificador)
+        public NotificationFilter(INotificationContext notificator)
         {
-            _notificator = notificador;
+            _notificator = notificator;
         }
 
         public void OnActionExecuting(ActionExecutingContext context) { }
@@ -20,9 +20,9 @@ namespace StartOnion.Api.Filters
         {
             if (_notificator.HasNotifications())
             {
-                var resposta = JsonConvert.SerializeObject(_notificator.Notifications);
+                var response = JsonConvert.SerializeObject(_notificator.Notifications);
 
-                context.Result = new ObjectResult(resposta)
+                context.Result = new ObjectResult(response)
                 {
                     StatusCode = (int)HttpStatusCode.BadRequest
                 };

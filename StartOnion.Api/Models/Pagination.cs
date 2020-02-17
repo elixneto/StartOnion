@@ -11,7 +11,7 @@
         /// <summary>
         /// 
         /// </summary>
-        public uint Page { get => _page; set { if (value < 1) _page = 1; } }
+        public uint Page { get => _page; set { if (value <= 0) _page = 1; } }
         /// <summary>
         /// 
         /// </summary>
