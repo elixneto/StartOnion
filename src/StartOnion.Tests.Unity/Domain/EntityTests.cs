@@ -21,8 +21,8 @@ namespace StartOnion.Camadas.Testes.Unidade.Dominio
         [Fact]
         public void DeveLancarExcecaoQuandoNaoInformarOValidador()
         {
-            static void actSemConstrutor() => new MinhaEntidade().Validar();
-            static void actComConstrutor() => new MinhaEntidade(null).Validar();
+            static void actSemConstrutor() => new MinhaEntidade().Validate();
+            static void actComConstrutor() => new MinhaEntidade(null).Validate();
 
             Assert.Throws<ValidatorNotFoundException>(actSemConstrutor);
             Assert.Throws<ValidatorNotFoundException>(actComConstrutor);

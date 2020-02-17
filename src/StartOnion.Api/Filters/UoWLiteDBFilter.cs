@@ -25,7 +25,6 @@ namespace StartOnion.Api.Filters
                 _context.Commit();
             else
                 _context.Rollback();
-            _context.Dispose();
         }
     }
 }

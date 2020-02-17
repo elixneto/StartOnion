@@ -8,33 +8,33 @@ namespace StartOnion.Domain
     public abstract class Entity : Notifiable
     {
         public Guid Id { get; protected set; }
-        public DateTimeOffset DataEHoraDeCriacao { get; protected set; }
+        public DateTimeOffset CreationTime { get; protected set; }
 
-        private readonly IValidator _validador;
+        private readonly IValidator _validator;
 
         public Entity()
         {
-            CriarPropriedades();
+            SetProperties();
         }
 
         public Entity(Guid id)
         {
             Id = id;
-            DataEHoraDeCriacao = DateTimeOffset.Now;
+            CreationTime = DateTimeOffset.Now;
         }
 
         public Entity(IValidator validador)
         {
-            CriarPropriedades();
-            _validador = validador;
+            SetProperties();
+            _validator = validador;
         }
 
-        public void Validar()
+        public void Validate()
         {
-            if (_validador == default)
+            if (_validator == default)
                 throw new ValidatorNotFoundException();
 
-            AddNotifications(_validador.Validate(this).Errors);
+            AddNotifications(_validator.Validate(this).Errors);
         }
 
         public override bool Equals(object obj)
@@ -52,9 +52,9 @@ namespace StartOnion.Domain
         public static bool operator ==(Entity e1, Entity e2) => Equals(e1, e2);
         public static bool operator !=(Entity e1, Entity e2) => !Equals(e1, e2);
 
-        private void CriarPropriedades() {
+        private void SetProperties() {
             Id = Guid.NewGuid();
-            DataEHoraDeCriacao = DateTimeOffset.Now;
+            CreationTime = DateTimeOffset.Now;
         }
     }
 }

@@ -5,10 +5,12 @@
     <Version>3.0.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description></Description>
+    <RepositoryUrl>https://github.com/elixneto/StartOnion</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\GIT\StartOnion\src\StartOnion.Camada.CrossCutting\StartOnion.Camada.CrossCutting.xml</DocumentationFile>
+    <DocumentationFile>C:\GIT\StartOnion\src\StartOnion.CrossCutting\StartOnion.CrossCutting.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
