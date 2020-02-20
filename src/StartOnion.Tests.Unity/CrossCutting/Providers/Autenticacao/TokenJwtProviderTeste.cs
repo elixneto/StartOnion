@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using Moq;
+﻿using Microsoft.IdentityModel.Tokens;
 using StartOnion.CrossCutting.Providers.Authentication;
 using System;
 using System.Collections.Generic;
@@ -20,18 +18,12 @@ namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Providers.Autenticacao
         private DateTime _dataDeExpiracao = new DateTime(2020, 1, 1);
 
         private readonly string _tokenValido = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJleHAiOjE1Nzc4NTEyMDAsImlzcyI6Im15aXNzdWVyIiwiYXVkIjoibXlhdWRpZW5jZSJ9.BShdfLm06PItIgOSS1KT01yZaimFTvcfJXpmMbdKK5Q";
-        private readonly Mock<IConfiguration> _mockConfiguration = new Mock<IConfiguration>();
         private readonly ITokenJwtProvider _provider;
 
         public TokenJwtProviderTeste()
         {
             _chaveSimetrica = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_chaveDeSeguranca));
-            var mockConfSection = new Mock<IConfigurationSection>();
-            mockConfSection.SetupGet(m => m[It.Is<string>(s => s == "SecurityKey")]).Returns(_chaveDeSeguranca);
-            mockConfSection.SetupGet(m => m[It.Is<string>(s => s == "Issuer")]).Returns(_issuer);
-            mockConfSection.SetupGet(m => m[It.Is<string>(s => s == "Audience")]).Returns(_audience);
-            _mockConfiguration.Setup(a => a.GetSection(It.Is<string>(s => s == "Jwt"))).Returns(mockConfSection.Object);
-            _provider = new TokenJwtProvider(_mockConfiguration.Object);
+            _provider = new TokenJwtProvider(new JwtConfiguration(_chaveDeSeguranca, _issuer, _audience));
         }
 
         [Fact]

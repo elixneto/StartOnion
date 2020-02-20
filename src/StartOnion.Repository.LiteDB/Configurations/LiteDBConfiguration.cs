@@ -1,10 +1,10 @@
 ﻿namespace StartOnion.Repository.LiteDB.Configurations
 {
-    public class ConfigLiteDB
+    public class LiteDBConfiguration
     {
         public string PathDB { get; }
 
-        public ConfigLiteDB(string pathDB)
+        public LiteDBConfiguration(string pathDB)
         {
             PathDB = pathDB;
         }

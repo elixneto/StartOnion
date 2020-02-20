@@ -25,9 +25,9 @@ namespace StartOnion.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddStartOnionCrossCutting(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddStartOnionCrossCutting(this IServiceCollection services, JwtConfiguration configurationJwt)
         {
-            var provedorDeTokenJwt = new TokenJwtProvider(configuration);
+            var provedorDeTokenJwt = new TokenJwtProvider(configurationJwt);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -50,7 +50,7 @@ namespace StartOnion.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddStartOnionRepositoryRavenDB(this IServiceCollection services, ConfigRavenDB config)
+        public static IServiceCollection AddStartOnionRepositoryRavenDB(this IServiceCollection services, RavenDBConfiguration config)
         {
             services.AddSingleton<IDocumentStore>(config.DocumentStore);
             services.AddScoped<ContextRepositoryRavenDB>();
@@ -59,7 +59,7 @@ namespace StartOnion.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddStartOnionRepositoryLiteDB(this IServiceCollection services, ConfigLiteDB config)
+        public static IServiceCollection AddStartOnionRepositoryLiteDB(this IServiceCollection services, LiteDBConfiguration config)
         {
             services.AddSingleton(config);
             services.AddScoped<ContextRepositoryLiteDB>();

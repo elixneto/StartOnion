@@ -5,24 +5,24 @@ namespace StartOnion.Repository.LiteDB.Contexts
 {
     public sealed class ContextRepositoryLiteDB
     {
-        private readonly ConfigLiteDB _configuracao;
-        public LiteDatabase Sessao { get; private set; }
+        private readonly LiteDBConfiguration _configuration;
+        public LiteDatabase Session { get; private set; }
 
-        public ContextRepositoryLiteDB(ConfigLiteDB configuracao)
+        public ContextRepositoryLiteDB(LiteDBConfiguration configuracao)
         {
-            _configuracao = configuracao;
+            _configuration = configuracao;
         }
 
         public void OpenSession()
         {
-            Sessao = new LiteDatabase(_configuracao.PathDB);
-            Sessao.BeginTrans();
+            Session = new LiteDatabase(_configuration.PathDB);
+            Session.BeginTrans();
         }
 
-        public void Commit() => this.Sessao.Commit();
+        public void Commit() => this.Session.Commit();
 
-        public void Rollback() => this.Sessao.Rollback();
+        public void Rollback() => this.Session.Rollback();
 
-        public void Dispose() => this.Sessao.Dispose();
+        public void Dispose() => this.Session.Dispose();
     }
 }

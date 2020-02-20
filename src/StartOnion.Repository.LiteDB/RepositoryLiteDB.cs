@@ -9,24 +9,24 @@ namespace StartOnion.Repository.LiteDB
 {
     public abstract class RepositoryLiteDB<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
-        public readonly ContextRepositoryLiteDB _contexto;
+        public readonly ContextRepositoryLiteDB ContextLiteDB;
 
-        protected RepositoryLiteDB(ContextRepositoryLiteDB contexto)
+        protected RepositoryLiteDB(ContextRepositoryLiteDB context)
         {
-            _contexto = contexto;
+            ContextLiteDB = context;
         }
 
         public void Add(TEntity entidade)
-            => _contexto.Sessao.GetCollection<TEntity>().Insert(entidade);
+            => ContextLiteDB.Session.GetCollection<TEntity>().Insert(entidade);
 
         public void Add(ICollection<TEntity> entidades)
-            => _contexto.Sessao.GetCollection<TEntity>().InsertBulk(entidades);
+            => ContextLiteDB.Session.GetCollection<TEntity>().InsertBulk(entidades);
 
         public TEntity GetById(Guid id)
-            => _contexto.Sessao.GetCollection<TEntity>().FindById(new BsonValue(id));
+            => ContextLiteDB.Session.GetCollection<TEntity>().FindById(new BsonValue(id));
 
         public void Remove(TEntity entidade)
-            => _contexto.Sessao.GetCollection<TEntity>().Delete(new BsonValue(entidade.Id));
+            => ContextLiteDB.Session.GetCollection<TEntity>().Delete(new BsonValue(entidade.Id));
 
         public void Remove(ICollection<TEntity> entidades)
         {

@@ -22,12 +22,12 @@ namespace StartOnion.CrossCutting.Providers.Authentication
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="configuracao"></param>
-        public TokenJwtProvider(IConfiguration configuracao)
+        /// <param name="config"></param>
+        public TokenJwtProvider(JwtConfiguration config)
         {
-            _securityKey = configuracao?.GetSection("Jwt")?["SecurityKey"];
-            _issuer = configuracao?.GetSection("Jwt")?["Issuer"];
-            _audience = configuracao?.GetSection("Jwt")?["Audience"];
+            _securityKey = config.SecurityKey;
+            _issuer = config.Issuer;
+            _audience = config.Audience;
 
             if (_securityKey == default || _issuer == default || _audience == default)
                 throw new JwtNotConfiguredException();
