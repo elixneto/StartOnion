@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Raven.Client.Documents;
@@ -44,6 +43,7 @@ namespace StartOnion.DependencyInjection
                     };
                 });
 
+            services.AddSingleton(configurationJwt);
             services.AddSingleton<ITokenJwtProvider, TokenJwtProvider>();
             services.AddScoped<INotificationContext, NotificationContext>();
 
