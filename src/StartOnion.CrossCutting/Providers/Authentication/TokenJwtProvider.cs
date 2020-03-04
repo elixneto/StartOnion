@@ -71,7 +71,10 @@ namespace StartOnion.CrossCutting.Providers.Authentication
 
         private string GenerateTokenJwt(string id, IDictionary<string, string> customClaims, IEnumerable<string> roles, DateTime? expirationDate = null)
         {
-            var claims = new List<Claim> { new Claim("sub", id) };
+            var claims = new List<Claim> { 
+                new Claim("sub", id),
+                new Claim("iat", DateTimeOffset.Now.ToString())
+            };
 
             if (customClaims != null && customClaims.Any())
                 claims.AddRange(customClaims.Select(c => new Claim(c.Key, c.Value)));
