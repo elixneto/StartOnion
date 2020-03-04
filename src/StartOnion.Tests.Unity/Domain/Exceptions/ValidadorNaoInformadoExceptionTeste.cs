@@ -9,7 +9,7 @@ namespace StartOnion.Camadas.Testes.Unidade.Dominio.Exceptions
         [Fact]
         public async Task DeveConterAMensagemCorretaAoLancarAExcecao()
         {
-            var mensagemEsperada = "O validador não foi informado na classe implementada. Use o construtor que informa o validador.";
+            var mensagemEsperada = "The validator wasn't found. Use the right constructor.";
 
             var exception = await Assert.ThrowsAsync<ValidatorNotFoundException>(() => throw new ValidatorNotFoundException());
 

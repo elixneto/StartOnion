@@ -3,6 +3,7 @@ using StartOnion.Domain.Interfaces;
 using StartOnion.Repository.RavenDB.Contexts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StartOnion.Repository.RavenDB
 {
@@ -15,7 +16,8 @@ namespace StartOnion.Repository.RavenDB
             ContextRavenDB = context;
         }
 
-        public virtual void Add(TEntity entity) => ContextRavenDB.Session.Store(entity);
+        public virtual void Add(TEntity entity)
+            => ContextRavenDB.Session.Store(entity);
 
         public virtual void Add(ICollection<TEntity> entities)
         {
@@ -23,9 +25,14 @@ namespace StartOnion.Repository.RavenDB
                 this.Add(entity);
         }
 
-        public virtual TEntity GetById(Guid id) => ContextRavenDB.Session.Load<TEntity>(id.ToString());
+        public IEnumerable<TEntity> GetAll()
+            => ContextRavenDB.Session.Query<TEntity>().ToList();
 
-        public virtual void Remove(TEntity entity) => ContextRavenDB.Session.Delete(entity);
+        public virtual TEntity GetById(Guid id)
+            => ContextRavenDB.Session.Load<TEntity>(id.ToString());
+
+        public virtual void Remove(TEntity entity)
+            => ContextRavenDB.Session.Delete(entity);
 
         public virtual void Remove(ICollection<TEntity> entities)
         {
