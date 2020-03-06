@@ -211,6 +211,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:StartOnion.CrossCutting.Providers.Authentication.ITokenJwtProvider.GetJwtSecurityTokenObject(System.String)">
+            <summary>
+            Get JwtSecurityToken by string token
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
         <member name="T:StartOnion.CrossCutting.Providers.Authentication.JwtConfiguration">
             <summary>
             JWT Configuration
@@ -300,6 +307,13 @@
             <summary>
             Get SymmetricSecurityKey
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StartOnion.CrossCutting.Providers.Authentication.TokenJwtProvider.GetJwtSecurityTokenObject(System.String)">
+            <summary>
+            Get JwtSecurityToken by string token
+            </summary>
+            <param name="token"></param>
             <returns></returns>
         </member>
         <member name="T:StartOnion.CrossCutting.Security.CryptoHelpers.MD5Helper">

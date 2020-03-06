@@ -82,8 +82,10 @@ namespace StartOnion.CrossCutting.Providers.Authentication
             if (roles != null && roles.Any())
                 claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
 
-            return new JwtSecurityTokenHandler()
-                        .WriteToken(new JwtSecurityToken(
+            var tokenHandler = new JwtSecurityTokenHandler();
+            tokenHandler.SetDefaultTimesOnTokenCreation = true;
+
+            return tokenHandler.WriteToken(new JwtSecurityToken(
                             issuer: GetIssuer(),
                             audience: GetAudience(),
                             expires: expirationDate,
@@ -108,6 +110,14 @@ namespace StartOnion.CrossCutting.Providers.Authentication
         /// <returns></returns>
         public SymmetricSecurityKey GetSymmetricSecurityKey()
             => new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_securityKey));
+
+        /// <summary>
+        /// Get JwtSecurityToken by string token
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public JwtSecurityToken GetJwtSecurityTokenObject(string token)
+            => new JwtSecurityTokenHandler().ReadJwtToken(token);
 
         private SigningCredentials GetSigningCredentials()
             => new SigningCredentials(GetSymmetricSecurityKey(), "HS256");

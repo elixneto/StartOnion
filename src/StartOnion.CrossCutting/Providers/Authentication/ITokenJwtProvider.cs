@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace StartOnion.CrossCutting.Providers.Authentication
 {
@@ -54,5 +55,11 @@ namespace StartOnion.CrossCutting.Providers.Authentication
         /// </summary>
         /// <returns></returns>
         SymmetricSecurityKey GetSymmetricSecurityKey();
+        /// <summary>
+        /// Get JwtSecurityToken by string token
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        JwtSecurityToken GetJwtSecurityTokenObject(string token);
     }
 }
