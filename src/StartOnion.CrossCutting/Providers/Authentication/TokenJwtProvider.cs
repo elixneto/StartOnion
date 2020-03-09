@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using StartOnion.CrossCutting.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -117,7 +116,13 @@ namespace StartOnion.CrossCutting.Providers.Authentication
         /// <param name="token"></param>
         /// <returns></returns>
         public JwtSecurityToken GetJwtSecurityTokenObject(string token)
-            => new JwtSecurityTokenHandler().ReadJwtToken(token);
+        {
+            var handler = new JwtSecurityTokenHandler();
+            if(handler.CanReadToken(token))
+                return handler.ReadJwtToken(token);
+
+            return default;
+        }
 
         private SigningCredentials GetSigningCredentials()
             => new SigningCredentials(GetSymmetricSecurityKey(), "HS256");
