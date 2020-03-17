@@ -13,11 +13,7 @@ namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Providers.Autenticacao
         private SymmetricSecurityKey _chaveSimetrica;
         private string _issuer = "myissuer";
         private string _audience = "myaudience";
-        private string _sub = "1";
-        private List<string> _roles = new List<string> { "admin" };
-        private DateTime _dataDeExpiracao = new DateTime(2020, 1, 1);
 
-        private readonly string _tokenValido = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJleHAiOjE1Nzc4NTEyMDAsImlzcyI6Im15aXNzdWVyIiwiYXVkIjoibXlhdWRpZW5jZSJ9.BShdfLm06PItIgOSS1KT01yZaimFTvcfJXpmMbdKK5Q";
         private readonly ITokenJwtProvider _provider;
 
         public TokenJwtProviderTeste()
@@ -26,13 +22,6 @@ namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Providers.Autenticacao
             _provider = new TokenJwtProvider(new JwtConfiguration(_chaveDeSeguranca, _issuer, _audience));
         }
 
-        [Fact]
-        public void DeveGerarUmTokenJwtValido()
-        {
-            var tokenGerado = _provider.GenerateToken(_sub, _roles, _dataDeExpiracao);
-
-            Assert.Equal(_tokenValido, tokenGerado);
-        }
 
         [Fact]
         public void DeveRetornarOIssuerCorreto()

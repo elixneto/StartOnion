@@ -7,7 +7,7 @@ namespace StartOnion.Domain
 {
     public abstract class Entity : Notifiable
     {
-        public Guid Id { get; protected set; }
+        public string Id { get; protected set; }
         public DateTimeOffset CreationTime { get; protected set; }
 
         private readonly IValidator _validator;
@@ -17,7 +17,7 @@ namespace StartOnion.Domain
             SetProperties();
         }
 
-        public Entity(Guid id)
+        public Entity(string id)
         {
             Id = id;
             CreationTime = DateTimeOffset.Now;
@@ -53,7 +53,7 @@ namespace StartOnion.Domain
         public static bool operator !=(Entity e1, Entity e2) => !Equals(e1, e2);
 
         private void SetProperties() {
-            Id = Guid.NewGuid();
+            Id = Guid.NewGuid().ToString();
             CreationTime = DateTimeOffset.Now;
         }
     }
