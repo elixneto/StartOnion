@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EB68C267
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartOnion.Tests.Unity", "StartOnion.Tests.Unity\StartOnion.Tests.Unity.csproj", "{97559454-B3A9-4A8C-99F4-17E4314BCDF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartOnion.Repository.LiteDB", "StartOnion.Repository.LiteDB\StartOnion.Repository.LiteDB.csproj", "{BCCFB0F1-07C8-4846-9A4E-7C00E38E1B60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartOnion.Repository.LiteDB", "StartOnion.Repository.LiteDB\StartOnion.Repository.LiteDB.csproj", "{BCCFB0F1-07C8-4846-9A4E-7C00E38E1B60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
