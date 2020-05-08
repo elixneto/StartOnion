@@ -9,7 +9,7 @@ namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Exceptions
         [Fact]
         public async Task DeveLancarExcecaoComAMesangemCorreta()
         {
-            var mensagemEsperada = "Configure no appsetings.json: \"Jwt\":{ \"SecurityKey\": \"suachave\", \"Issuer\": \"seuissuer\", \"Audience\":\"seuaudience\"}";
+            var mensagemEsperada = "Configure at appsetings.json: \"Jwt\":{ \"SecurityKey\": \"[your_key]\", \"Issuer\": \"[your_issuer]\", \"Audience\":\"[your_audience]\"}";
             
             var exception = await Assert.ThrowsAsync<JwtNotConfiguredException>(() => throw new JwtNotConfiguredException());
 

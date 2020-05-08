@@ -22,6 +22,9 @@ namespace StartOnion.Repository.LiteDB
         public void Add(ICollection<TEntity> entidades)
             => ContextLiteDB.Session.GetCollection<TEntity>().InsertBulk(entidades);
 
+        public IEnumerable<TEntity> GetAll()
+            => ContextLiteDB.Session.GetCollection<TEntity>().FindAll();
+
         public TEntity GetById(Guid id)
             => ContextLiteDB.Session.GetCollection<TEntity>().FindById(new BsonValue(id));
 

@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using StartOnion.CrossCutting.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -71,7 +70,10 @@ namespace StartOnion.CrossCutting.Providers.Authentication
 
         private string GenerateTokenJwt(string id, IDictionary<string, string> customClaims, IEnumerable<string> roles, DateTime? expirationDate = null)
         {
-            var claims = new List<Claim> { new Claim("sub", id) };
+            var claims = new List<Claim> { 
+                new Claim("sub", id),
+                new Claim("iat", DateTimeOffset.Now.ToString())
+            };
 
             if (customClaims != null && customClaims.Any())
                 claims.AddRange(customClaims.Select(c => new Claim(c.Key, c.Value)));
@@ -79,8 +81,10 @@ namespace StartOnion.CrossCutting.Providers.Authentication
             if (roles != null && roles.Any())
                 claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
 
-            return new JwtSecurityTokenHandler()
-                        .WriteToken(new JwtSecurityToken(
+            var tokenHandler = new JwtSecurityTokenHandler();
+            tokenHandler.SetDefaultTimesOnTokenCreation = true;
+
+            return tokenHandler.WriteToken(new JwtSecurityToken(
                             issuer: GetIssuer(),
                             audience: GetAudience(),
                             expires: expirationDate,
@@ -105,6 +109,20 @@ namespace StartOnion.CrossCutting.Providers.Authentication
         /// <returns></returns>
         public SymmetricSecurityKey GetSymmetricSecurityKey()
             => new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_securityKey));
+
+        /// <summary>
+        /// Get JwtSecurityToken by string token
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public JwtSecurityToken GetJwtSecurityTokenObject(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            if(handler.CanReadToken(token))
+                return handler.ReadJwtToken(token);
+
+            return default;
+        }
 
         private SigningCredentials GetSigningCredentials()
             => new SigningCredentials(GetSymmetricSecurityKey(), "HS256");

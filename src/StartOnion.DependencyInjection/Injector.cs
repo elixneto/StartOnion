@@ -24,27 +24,30 @@ namespace StartOnion.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddStartOnionCrossCutting(this IServiceCollection services, JwtConfiguration configurationJwt)
+        public static IServiceCollection AddStartOnionCrossCutting(this IServiceCollection services, JwtConfiguration configurationJwt = default)
         {
-            var provedorDeTokenJwt = new TokenJwtProvider(configurationJwt);
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters()
+            if (configurationJwt != default)
+            {
+                var provedorDeTokenJwt = new TokenJwtProvider(configurationJwt);
+                services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
                     {
-                        RequireSignedTokens = true,
-                        RequireExpirationTime = false,
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = provedorDeTokenJwt.GetIssuer(),
-                        ValidAudience = provedorDeTokenJwt.GetAudience(),
-                        IssuerSigningKey = provedorDeTokenJwt.GetSymmetricSecurityKey()
-                    };
-                });
+                        options.TokenValidationParameters = new TokenValidationParameters()
+                        {
+                            RequireSignedTokens = true,
+                            RequireExpirationTime = false,
+                            ValidateIssuer = true,
+                            ValidateAudience = true,
+                            ValidateIssuerSigningKey = true,
+                            ValidIssuer = provedorDeTokenJwt.GetIssuer(),
+                            ValidAudience = provedorDeTokenJwt.GetAudience(),
+                            IssuerSigningKey = provedorDeTokenJwt.GetSymmetricSecurityKey()
+                        };
+                    });
+                services.AddSingleton(configurationJwt);
+                services.AddSingleton<ITokenJwtProvider, TokenJwtProvider>();
+            }
 
-            services.AddSingleton(configurationJwt);
-            services.AddSingleton<ITokenJwtProvider, TokenJwtProvider>();
             services.AddScoped<INotificationContext, NotificationContext>();
 
             return services;
