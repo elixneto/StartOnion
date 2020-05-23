@@ -57,7 +57,7 @@ namespace StartOnion.DependencyInjection
         {
             services.AddSingleton<IDocumentStore>(config.DocumentStore);
             services.AddScoped<ContextRepositoryRavenDB>();
-            services.AddScoped<ContextQueryRavenDB>();
+            services.AddScoped<ContextRepositoryRavenDBAsync>();
 
             return services;
         }
