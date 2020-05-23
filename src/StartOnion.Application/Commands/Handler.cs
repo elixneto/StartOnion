@@ -13,13 +13,13 @@ namespace StartOnion.Application.Commands
         public Handler(INotificationContext notificator) { _notificator = notificator; }
 
         public abstract TResponse Handle(TRequest command);
-        public abstract void PreHandling(TRequest command);
+        public abstract void PreHandle(TRequest command);
 
         public async Task<TResponse> Handle(TRequest command, CancellationToken cancellationToken)
         {
             await Task.Run(() => { });
 
-            PreHandling(command);
+            PreHandle(command);
 
             if (_notificator.HasNotifications())
                 return default;
