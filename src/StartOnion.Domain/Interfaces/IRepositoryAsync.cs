@@ -9,7 +9,7 @@ namespace StartOnion.Domain.Interfaces
         Task<TEntity> GetById(Guid id);
         Task Add(TEntity entity);
         Task Add(ICollection<TEntity> entities);
-        Task Remove(TEntity entity);
-        Task Remove(ICollection<TEntity> entities);
+        void Remove(TEntity entity);
+        void Remove(ICollection<TEntity> entities);
     }
 }
