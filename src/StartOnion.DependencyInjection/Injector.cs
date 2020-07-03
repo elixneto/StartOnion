@@ -3,11 +3,14 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using MongoDB.Driver;
 using Raven.Client.Documents;
 using StartOnion.CrossCutting.Notifications;
 using StartOnion.CrossCutting.Providers.Authentication;
 using StartOnion.Repository.LiteDB.Configurations;
 using StartOnion.Repository.LiteDB.Contexts;
+using StartOnion.Repository.MongoDB.Configuration;
+using StartOnion.Repository.MongoDB.Contexts;
 using StartOnion.Repository.RavenDB.Configurations;
 using StartOnion.Repository.RavenDB.Contexts;
 using System.Reflection;
@@ -66,6 +69,14 @@ namespace StartOnion.DependencyInjection
         {
             services.AddSingleton(config);
             services.AddScoped<ContextRepositoryLiteDB>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddStartOnionRepositoryMongoDB(this IServiceCollection services, MongoDBConfiguration config)
+        {
+            services.AddSingleton(config);
+            services.AddScoped<ContextRepositoryMongoDBAsync>();
 
             return services;
         }

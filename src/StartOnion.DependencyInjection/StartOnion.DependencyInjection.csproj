@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
-    <Version>3.1.0</Version>
+    <Version>3.1.1</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/elixneto/StartOnion</RepositoryUrl>
@@ -20,11 +20,13 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\StartOnion.CrossCutting\StartOnion.CrossCutting.csproj" />
     <ProjectReference Include="..\StartOnion.Repository.LiteDB\StartOnion.Repository.LiteDB.csproj" />
+    <ProjectReference Include="..\StartOnion.Repository.MongoDB\StartOnion.Repository.MongoDB.csproj" />
     <ProjectReference Include="..\StartOnion.Repository.RavenDB\StartOnion.Repository.RavenDB.csproj" />
   </ItemGroup>
 

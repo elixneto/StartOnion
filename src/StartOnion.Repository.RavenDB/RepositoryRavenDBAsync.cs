@@ -32,13 +32,13 @@ namespace StartOnion.Repository.RavenDB
         public virtual async Task<TEntity> GetById(Guid id)
             => await ContextRavenDB.Session.LoadAsync<TEntity>(id.ToString());
 
-        public virtual void Remove(TEntity entity)
-            => ContextRavenDB.Session.Delete(entity);
+        public virtual async Task Remove(TEntity entity)
+            => await Task.Run(() => ContextRavenDB.Session.Delete(entity));
 
-        public virtual void Remove(ICollection<TEntity> entities)
+        public virtual async Task Remove(ICollection<TEntity> entities)
         {
             foreach (var entity in entities)
-                this.Remove(entity);
+               await this.Remove(entity);
         }
     }
 }
