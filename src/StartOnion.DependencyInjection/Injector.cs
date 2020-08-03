@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using MongoDB.Driver;
 using Raven.Client.Documents;
 using StartOnion.CrossCutting.Notifications;
 using StartOnion.CrossCutting.Providers.Authentication;
@@ -13,6 +11,7 @@ using StartOnion.Repository.MongoDB.Configuration;
 using StartOnion.Repository.MongoDB.Contexts;
 using StartOnion.Repository.RavenDB.Configurations;
 using StartOnion.Repository.RavenDB.Contexts;
+using System;
 using System.Reflection;
 
 namespace StartOnion.DependencyInjection
@@ -22,6 +21,12 @@ namespace StartOnion.DependencyInjection
         public static IServiceCollection AddStartOnionApplication(this IServiceCollection services, Assembly[] handlersAssembly)
         {
             services.AddMediatR(handlersAssembly);
+
+            return services;
+        }
+        public static IServiceCollection AddStartOnionApplication(this IServiceCollection services, Type[] handlersType)
+        {
+            services.AddMediatR(handlersType);
 
             return services;
         }
