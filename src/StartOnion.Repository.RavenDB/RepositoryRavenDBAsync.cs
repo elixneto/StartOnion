@@ -29,6 +29,9 @@ namespace StartOnion.Repository.RavenDB
         public virtual async Task<IEnumerable<TEntity>> GetAll()
             => await ContextRavenDB.Session.Query<TEntity>().ToListAsync();
 
+        public virtual async Task<TEntity> GetById(string id)
+            => await ContextRavenDB.Session.LoadAsync<TEntity>(id);
+
         public virtual async Task<TEntity> GetById(Guid id)
             => await ContextRavenDB.Session.LoadAsync<TEntity>(id.ToString());
 

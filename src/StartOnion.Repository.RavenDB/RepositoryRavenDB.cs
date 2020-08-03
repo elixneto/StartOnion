@@ -28,6 +28,9 @@ namespace StartOnion.Repository.RavenDB
         public IEnumerable<TEntity> GetAll()
             => ContextRavenDB.Session.Query<TEntity>().ToList();
 
+        public virtual TEntity GetById(string id)
+            => ContextRavenDB.Session.Load<TEntity>(id);
+
         public virtual TEntity GetById(Guid id)
             => ContextRavenDB.Session.Load<TEntity>(id.ToString());
 

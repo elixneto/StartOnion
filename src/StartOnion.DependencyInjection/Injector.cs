@@ -19,10 +19,9 @@ namespace StartOnion.DependencyInjection
 {
     public static class Injector
     {
-        public static IServiceCollection AddStartOnionApplication(this IServiceCollection services, Assembly[] handlersAssembly, Assembly[] mappersAssembly)
+        public static IServiceCollection AddStartOnionApplication(this IServiceCollection services, Assembly[] handlersAssembly)
         {
             services.AddMediatR(handlersAssembly);
-            services.AddAutoMapper(mappersAssembly);
 
             return services;
         }

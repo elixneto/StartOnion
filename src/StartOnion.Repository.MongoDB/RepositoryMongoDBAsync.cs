@@ -27,6 +27,8 @@ namespace StartOnion.Repository.MongoDB
 
         public async Task<TEntity> GetById(Guid id) => (await DbSet.FindAsync(DefaultFilters<TEntity>.EqualsById(id))).SingleOrDefault();
 
+        public async Task<TEntity> GetById(string id) => (await DbSet.FindAsync(DefaultFilters<TEntity>.EqualsById(id))).SingleOrDefault();
+
         public async Task Remove(TEntity entity) => await ContextMongoDB.AddCommand(async () => await DbSet.DeleteOneAsync(DefaultFilters<TEntity>.EqualsById(entity)));
 
         public async Task Remove(ICollection<TEntity> entities)

@@ -25,6 +25,9 @@ namespace StartOnion.Repository.LiteDB
         public IEnumerable<TEntity> GetAll()
             => ContextLiteDB.Session.GetCollection<TEntity>().FindAll();
 
+        public TEntity GetById(string id)
+            => ContextLiteDB.Session.GetCollection<TEntity>().FindById(new BsonValue(id));
+
         public TEntity GetById(Guid id)
             => ContextLiteDB.Session.GetCollection<TEntity>().FindById(new BsonValue(id));
 

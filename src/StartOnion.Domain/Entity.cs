@@ -23,10 +23,10 @@ namespace StartOnion.Domain
             CreationTime = DateTimeOffset.Now;
         }
 
-        public Entity(IValidator validador)
+        public Entity(IValidator validator)
         {
             SetProperties();
-            _validator = validador;
+            _validator = validator;
         }
 
         public void Validate()

@@ -25,6 +25,15 @@ namespace StartOnion.CrossCutting.Notifications
             foreach (var er in errors)
                 this.AddNotification(er.ErrorMessage);
         }
+        /// <summary>
+        /// Add notifications to the class
+        /// </summary>
+        /// <param name="errors"></param>
+        protected void AddNotifications(IList<string> errors)
+        {
+            foreach (var er in errors)
+                this.AddNotification(er);
+        }
 
         /// <summary>
         /// If has notifications

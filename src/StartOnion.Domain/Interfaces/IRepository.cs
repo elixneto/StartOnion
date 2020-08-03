@@ -7,6 +7,7 @@ namespace StartOnion.Domain.Interfaces
     {
         IEnumerable<TEntity> GetAll();
         TEntity GetById(Guid id);
+        TEntity GetById(string id);
         void Add(TEntity entity);
         void Add(ICollection<TEntity> entities);
         void Remove(TEntity entity);

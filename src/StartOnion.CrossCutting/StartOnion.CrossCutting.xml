@@ -96,6 +96,12 @@
             </summary>
             <param name="errors"></param>
         </member>
+        <member name="M:StartOnion.CrossCutting.Notifications.Notifiable.AddNotifications(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Add notifications to the class
+            </summary>
+            <param name="errors"></param>
+        </member>
         <member name="M:StartOnion.CrossCutting.Notifications.Notifiable.HasNotifications">
             <summary>
             If has notifications
