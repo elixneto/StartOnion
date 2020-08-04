@@ -5,7 +5,7 @@ using System;
 
 namespace StartOnion.Domain
 {
-    public abstract class Entity : Notifiable
+    public abstract class Entity : Notifiable, ICloneable
     {
         public string Id { get; protected set; }
         public DateTimeOffset CreationTime { get; protected set; }
@@ -56,5 +56,7 @@ namespace StartOnion.Domain
             Id = Guid.NewGuid().ToString();
             CreationTime = DateTimeOffset.Now;
         }
+
+        public object Clone() => this.MemberwiseClone();
     }
 }
