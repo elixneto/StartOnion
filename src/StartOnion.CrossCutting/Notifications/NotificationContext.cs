@@ -32,7 +32,11 @@ namespace StartOnion.CrossCutting.Notifications
         public void Add(Notifiable notifiable)
         {
             if (notifiable != default)
-                _notificacoes.AddRange(notifiable.GetNotifications());
+            {
+                var notifications = notifiable.GetNotifications();
+                if(notifications != default)
+                    _notificacoes.AddRange(notifications);
+            }
         }
         /// <summary>
         /// Add messages to the context

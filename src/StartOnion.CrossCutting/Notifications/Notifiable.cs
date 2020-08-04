@@ -44,6 +44,6 @@ namespace StartOnion.CrossCutting.Notifications
         /// Get the notifications
         /// </summary>
         /// <returns></returns>
-        public IReadOnlyList<string> GetNotifications() => _notifications.ToArray();
+        public IReadOnlyList<string> GetNotifications() => _notifications?.ToArray();
     }
 }
