@@ -41,7 +41,10 @@ namespace StartOnion.Repository.RavenDB
         public virtual async Task Remove(ICollection<TEntity> entities)
         {
             foreach (var entity in entities)
-               await this.Remove(entity);
+                await this.Remove(entity);
         }
+
+        public virtual async Task Update(TEntity entity) => await Task.Run(() => throw new NotImplementedException());
+        public virtual async Task Update(ICollection<TEntity> entities) => await Task.Run(() => throw new NotImplementedException());
     }
 }

@@ -29,12 +29,22 @@ namespace StartOnion.Repository.MongoDB
 
         public async Task<TEntity> GetById(string id) => (await DbSet.FindAsync(DefaultFilters<TEntity>.EqualsById(id))).SingleOrDefault();
 
-        public async Task Remove(TEntity entity) => await ContextMongoDB.AddCommand(async () => await DbSet.DeleteOneAsync(DefaultFilters<TEntity>.EqualsById(entity)));
+        public async Task Remove(TEntity entity) =>
+            await ContextMongoDB.AddCommand(async () => await DbSet.DeleteOneAsync(DefaultFilters<TEntity>.EqualsById(entity)));
 
         public async Task Remove(ICollection<TEntity> entities)
         {
             foreach (var entity in entities)
                 await Remove(entity);
+        }
+
+        public async Task Update(TEntity entity) => 
+            await ContextMongoDB.AddCommand(async () => await DbSet.ReplaceOneAsync(DefaultFilters<TEntity>.EqualsById(entity.Id), entity));
+
+        public async Task Update(ICollection<TEntity> entities)
+        {
+            foreach (var entity in entities)
+                await Update(entity);
         }
     }
 }

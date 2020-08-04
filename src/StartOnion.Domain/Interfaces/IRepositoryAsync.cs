@@ -10,6 +10,8 @@ namespace StartOnion.Domain.Interfaces
         Task<TEntity> GetById(string id);
         Task Add(TEntity entity);
         Task Add(ICollection<TEntity> entities);
+        Task Update(TEntity entity);
+        Task Update(ICollection<TEntity> entities);
         Task Remove(TEntity entity);
         Task Remove(ICollection<TEntity> entities);
     }
