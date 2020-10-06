@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\StartOnion.CrossCutting\StartOnion.CrossCutting.csproj" />
     <ProjectReference Include="..\StartOnion.Domain\StartOnion.Domain.csproj" />
+    <ProjectReference Include="..\StartOnion.Provider.Authentication\StartOnion.Provider.Authentication.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using StartOnion.CrossCutting.Exceptions;
+﻿using StartOnion.Provider.Authentication.Exceptions;
 using System.Threading.Tasks;
 using Xunit;
 

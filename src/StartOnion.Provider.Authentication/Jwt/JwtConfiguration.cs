@@ -1,4 +1,4 @@
-﻿namespace StartOnion.CrossCutting.Providers.Authentication
+﻿namespace StartOnion.Provider.Authentication.Jwt
 {
     /// <summary>
     /// JWT Configuration

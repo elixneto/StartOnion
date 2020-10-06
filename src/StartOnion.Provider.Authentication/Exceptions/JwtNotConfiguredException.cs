@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StartOnion.CrossCutting.Exceptions
+namespace StartOnion.Provider.Authentication.Exceptions
 {
     /// <summary>
     /// JWT not configured exception

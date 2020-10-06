@@ -1,7 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using StartOnion.CrossCutting.Providers.Authentication;
-using System;
-using System.Collections.Generic;
+using StartOnion.Provider.Authentication.Jwt;
 using System.Text;
 using Xunit;
 

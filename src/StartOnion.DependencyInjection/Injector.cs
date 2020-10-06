@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Raven.Client.Documents;
 using StartOnion.CrossCutting.Notifications;
-using StartOnion.CrossCutting.Providers.Authentication;
+using StartOnion.Provider.Authentication.Jwt;
 using StartOnion.Repository.LiteDB.Configurations;
 using StartOnion.Repository.LiteDB.Contexts;
 using StartOnion.Repository.MongoDB.Configuration;
@@ -31,31 +31,33 @@ namespace StartOnion.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddStartOnionCrossCutting(this IServiceCollection services, JwtConfiguration configurationJwt = default)
+        public static IServiceCollection AddStartOnionCrossCutting(this IServiceCollection services)
         {
-            if (configurationJwt != default)
-            {
-                var provedorDeTokenJwt = new TokenJwtProvider(configurationJwt);
-                services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(options =>
-                    {
-                        options.TokenValidationParameters = new TokenValidationParameters()
-                        {
-                            RequireSignedTokens = true,
-                            RequireExpirationTime = false,
-                            ValidateIssuer = true,
-                            ValidateAudience = true,
-                            ValidateIssuerSigningKey = true,
-                            ValidIssuer = provedorDeTokenJwt.GetIssuer(),
-                            ValidAudience = provedorDeTokenJwt.GetAudience(),
-                            IssuerSigningKey = provedorDeTokenJwt.GetSymmetricSecurityKey()
-                        };
-                    });
-                services.AddSingleton(configurationJwt);
-                services.AddSingleton<ITokenJwtProvider, TokenJwtProvider>();
-            }
-
             services.AddScoped<INotificationContext, NotificationContext>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddStartOnionAuthenticationProvider(this IServiceCollection services, JwtConfiguration configurationJwt)
+        {
+            var provedorDeTokenJwt = new TokenJwtProvider(configurationJwt);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        RequireSignedTokens = true,
+                        RequireExpirationTime = false,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = provedorDeTokenJwt.GetIssuer(),
+                        ValidAudience = provedorDeTokenJwt.GetAudience(),
+                        IssuerSigningKey = provedorDeTokenJwt.GetSymmetricSecurityKey()
+                    };
+                });
+            services.AddSingleton(configurationJwt);
+            services.AddSingleton<ITokenJwtProvider, TokenJwtProvider>();
 
             return services;
         }

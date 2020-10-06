@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace StartOnion.CrossCutting.Providers.Authentication
+namespace StartOnion.Provider.Authentication.Jwt
 {
     /// <summary>
     /// Token JWT provider

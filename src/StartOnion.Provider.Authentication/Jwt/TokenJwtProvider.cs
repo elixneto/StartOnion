@@ -1,5 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using StartOnion.CrossCutting.Exceptions;
+using StartOnion.Provider.Authentication.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace StartOnion.CrossCutting.Providers.Authentication
+namespace StartOnion.Provider.Authentication.Jwt
 {
     /// <summary>
     /// Token JWT provider
@@ -70,14 +70,14 @@ namespace StartOnion.CrossCutting.Providers.Authentication
 
         private string GenerateTokenJwt(string id, IDictionary<string, string> customClaims, IEnumerable<string> roles, DateTime? expirationDate = null)
         {
-            var claims = new List<Claim> { 
+            var claims = new List<Claim> {
                 new Claim("sub", id),
                 new Claim("iat", DateTimeOffset.Now.ToString())
             };
 
             if (customClaims != null && customClaims.Any())
                 claims.AddRange(customClaims.Select(c => new Claim(c.Key, c.Value)));
-            
+
             if (roles != null && roles.Any())
                 claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
 
@@ -118,7 +118,7 @@ namespace StartOnion.CrossCutting.Providers.Authentication
         public JwtSecurityToken GetJwtSecurityTokenObject(string token)
         {
             var handler = new JwtSecurityTokenHandler();
-            if(handler.CanReadToken(token))
+            if (handler.CanReadToken(token))
                 return handler.ReadJwtToken(token);
 
             return default;
