@@ -23,6 +23,7 @@ namespace StartOnion.Api.Filters
             if (string.IsNullOrEmpty(tokenJwt))
                 return;
 
+            tokenJwt = tokenJwt.ToString().Replace("Bearer", "").Trim();
             var tokenJwtObject = _tokenJwtProvider.GetJwtSecurityTokenObject(tokenJwt);
             if (tokenJwtObject == default || string.IsNullOrEmpty(tokenJwtObject.Subject))
                 return;
