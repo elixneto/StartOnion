@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
-    <Version>3.1.1</Version>
+    <Version>3.3.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/elixneto/StartOnion</RepositoryUrl>
@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StartOnion.CrossCutting\StartOnion.CrossCutting.csproj" />
+    <ProjectReference Include="..\StartOnion.Provider.Authentication\StartOnion.Provider.Authentication.csproj" />
     <ProjectReference Include="..\StartOnion.Repository.LiteDB\StartOnion.Repository.LiteDB.csproj" />
     <ProjectReference Include="..\StartOnion.Repository.MongoDB\StartOnion.Repository.MongoDB.csproj" />
     <ProjectReference Include="..\StartOnion.Repository.RavenDB\StartOnion.Repository.RavenDB.csproj" />

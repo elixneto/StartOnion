@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Raven.Client.Documents;
 using StartOnion.CrossCutting.Notifications;
+using StartOnion.Provider.Authentication;
 using StartOnion.Provider.Authentication.Jwt;
 using StartOnion.Repository.LiteDB.Configurations;
 using StartOnion.Repository.LiteDB.Contexts;
@@ -58,6 +59,8 @@ namespace StartOnion.DependencyInjection
                 });
             services.AddSingleton(configurationJwt);
             services.AddSingleton<ITokenJwtProvider, TokenJwtProvider>();
+
+            services.AddScoped<ILoggedUser, LoggedUser>();
 
             return services;
         }
