@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace StartOnion.Provider.Authentication
+namespace StartOnion.CrossCutting.Authentication
 {
     public interface ILoggedUser
     {

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using StartOnion.CrossCutting.Authentication;
+using System.Collections.Generic;
 
 namespace StartOnion.Provider.Authentication
 {
-    public class LoggedUser : ILoggedUser
+    public sealed class LoggedUser : ILoggedUser
     {
         public string Id { get; private set; }
         public IDictionary<string, string> Claims { get; private set; }

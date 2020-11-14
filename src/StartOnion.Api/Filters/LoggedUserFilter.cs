@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using StartOnion.Provider.Authentication;
+using StartOnion.CrossCutting.Authentication;
 using StartOnion.Provider.Authentication.Jwt;
 using System.Collections.Generic;
 

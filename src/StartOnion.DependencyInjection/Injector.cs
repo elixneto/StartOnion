@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Raven.Client.Documents;
+using StartOnion.CrossCutting.Authentication;
 using StartOnion.CrossCutting.Notifications;
 using StartOnion.Provider.Authentication;
 using StartOnion.Provider.Authentication.Jwt;
