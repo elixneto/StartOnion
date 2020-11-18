@@ -10,13 +10,25 @@ namespace StartOnion.CrossCutting.Notifications
         /// <summary>
         /// Notifications list
         /// </summary>
-        IReadOnlyCollection<string> Notifications { get; }
+        IReadOnlyCollection<Notification> Notifications { get; }
 
+        void Add(int code);
         /// <summary>
         /// Add a message to the context
         /// </summary>
         /// <param name="message">Message</param>
         void Add(string message);
+        /// <summary>
+        /// Add a message to the context
+        /// </summary>
+        /// <param name="code">Code</param>
+        /// <param name="message">Message</param>
+        void Add(int code, string message);
+        /// <summary>
+        /// Add a notification object to the context
+        /// </summary>
+        /// <param name="notification">Notification object</param>
+        void Add(Notification notification);
         /// <summary>
         /// Add messages to the context
         /// </summary>

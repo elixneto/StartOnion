@@ -9,13 +9,20 @@ namespace StartOnion.CrossCutting.Notifications
     /// </summary>
     public abstract class Notifiable
     {
-        private readonly IList<string> _notifications = new List<string>();
+        private readonly IList<Notification> _notifications = new List<Notification>();
 
+        protected void AddNotification(int code) => _notifications.Add(new Notification(code));
         /// <summary>
         /// Add a notification to the class
         /// </summary>
         /// <param name="message"></param>
-        protected void AddNotification(string message) => _notifications.Add(message);
+        protected void AddNotification(string message) => _notifications.Add(new Notification(message));
+        /// <summary>
+        /// Add a notification to the class
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="message"></param>
+        protected void AddNotification(int code, string message) => _notifications.Add(new Notification(code, message));
         /// <summary>
         /// Add notifications to the class
         /// </summary>
@@ -44,6 +51,6 @@ namespace StartOnion.CrossCutting.Notifications
         /// Get the notifications
         /// </summary>
         /// <returns></returns>
-        public IReadOnlyList<string> GetNotifications() => _notifications?.ToArray();
+        public IReadOnlyList<Notification> GetNotifications() => _notifications?.ToArray();
     }
 }

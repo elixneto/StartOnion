@@ -45,6 +45,19 @@
             </summary>
             <param name="message">Message</param>
         </member>
+        <member name="M:StartOnion.CrossCutting.Notifications.INotificationContext.Add(System.Int32,System.String)">
+            <summary>
+            Add a message to the context
+            </summary>
+            <param name="code">Code</param>
+            <param name="message">Message</param>
+        </member>
+        <member name="M:StartOnion.CrossCutting.Notifications.INotificationContext.Add(StartOnion.CrossCutting.Notifications.Notification)">
+            <summary>
+            Add a notification object to the context
+            </summary>
+            <param name="notification">Notification object</param>
+        </member>
         <member name="M:StartOnion.CrossCutting.Notifications.INotificationContext.Add(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Add messages to the context
@@ -78,6 +91,13 @@
             <summary>
             Add a notification to the class
             </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:StartOnion.CrossCutting.Notifications.Notifiable.AddNotification(System.Int32,System.String)">
+            <summary>
+            Add a notification to the class
+            </summary>
+            <param name="code"></param>
             <param name="message"></param>
         </member>
         <member name="M:StartOnion.CrossCutting.Notifications.Notifiable.AddNotifications(System.Collections.Generic.IList{FluentValidation.Results.ValidationFailure})">
@@ -119,6 +139,19 @@
             Add a message to the context
             </summary>
             <param name="message">Message</param>
+        </member>
+        <member name="M:StartOnion.CrossCutting.Notifications.NotificationContext.Add(System.Int32,System.String)">
+            <summary>
+            Add a message to the context
+            </summary>
+            <param name="code">Message</param>
+            <param name="message">Message</param>
+        </member>
+        <member name="M:StartOnion.CrossCutting.Notifications.NotificationContext.Add(StartOnion.CrossCutting.Notifications.Notification)">
+            <summary>
+            Add a Notificatio nobject to the context
+            </summary>
+            <param name="notification">Notification object</param>
         </member>
         <member name="M:StartOnion.CrossCutting.Notifications.NotificationContext.Add(System.Collections.Generic.IEnumerable{System.String})">
             <summary>

@@ -17,7 +17,7 @@ namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Notificacoes
             _notificador.Add(mensagem);
 
             Assert.Equal(1, _notificador.Notifications.Count);
-            Assert.Equal(mensagem, _notificador.Notifications.First());
+            Assert.Equal(mensagem, _notificador.Notifications.Select(n => n.Message).First());
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Notificacoes
             _notificador.Add(mensagens);
 
             Assert.Equal(2, _notificador.Notifications.Count);
-            Assert.Equal(mensagens, _notificador.Notifications);
+            Assert.Equal(mensagens, _notificador.Notifications.Select(n => n.Message).ToList());
         }
 
         class ClasseNotificavel : Notifiable { public ClasseNotificavel(IEnumerable<string> mensagens) { foreach (var m in mensagens) AddNotification(m); } }
@@ -42,7 +42,7 @@ namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Notificacoes
             _notificador.Add(classe);
 
             Assert.Equal(2, _notificador.Notifications.Count);
-            Assert.Equal(mensagens, _notificador.Notifications);
+            Assert.Equal(mensagens, _notificador.Notifications.Select(n => n.Message).ToList());
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Notificacoes
             _notificador.Add(primeiraClasse, segundaClasse);
 
             Assert.Equal(4, _notificador.Notifications.Count);
-            Assert.Equal(conjuntoDeMensagens, _notificador.Notifications);
+            Assert.Equal(conjuntoDeMensagens, _notificador.Notifications.Select(n=>n.Message).ToList());
         }
 
         [Fact]
