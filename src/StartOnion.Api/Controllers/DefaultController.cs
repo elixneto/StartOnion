@@ -8,5 +8,7 @@ namespace StartOnion.Api.Controllers
         [HttpOptions]
         [AllowAnonymous]
         public void Options() { }
+
+        public CreatedResult Created() => Created(string.Empty, default);
     }
 }
