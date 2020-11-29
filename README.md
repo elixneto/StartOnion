@@ -1,3 +1,4 @@
+[![Build Status](https://rz3.visualstudio.com/StartOnion/_apis/build/status/elixneto.StartOnion?branchName=master)](https://rz3.visualstudio.com/StartOnion/_build/latest?definitionId=2&branchName=master)
 # StartOnion
 An Onion Architecture with DDD, CQRS, Notification Pattern & more...
 
