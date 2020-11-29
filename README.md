@@ -1,4 +1,6 @@
 [![Build Status](https://rz3.visualstudio.com/StartOnion/_apis/build/status/elixneto.StartOnion?branchName=master)](https://rz3.visualstudio.com/StartOnion/_build/latest?definitionId=2&branchName=master)
+![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/rz3/startonion/2)
+
 # StartOnion
 An Onion Architecture with DDD, CQRS, Notification Pattern & more...
 
