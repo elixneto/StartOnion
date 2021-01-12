@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace StartOnion.Api.Controllers
 {
@@ -10,5 +11,6 @@ namespace StartOnion.Api.Controllers
         public void Options() { }
 
         public CreatedResult Created() => Created(string.Empty, default);
+        public CreatedResult Created(object obj) => Created(string.Empty, JsonSerializer.Serialize(obj));
     }
 }

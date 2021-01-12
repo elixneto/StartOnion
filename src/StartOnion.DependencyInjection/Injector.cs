@@ -26,7 +26,7 @@ namespace StartOnion.DependencyInjection
 
             return services;
         }
-        public static IServiceCollection AddStartOnionApplication(this IServiceCollection services, Type[] handlersType)
+        public static IServiceCollection AddStartOnionApplication(this IServiceCollection services, params Type[] handlersType)
         {
             services.AddMediatR(handlersType);
 
