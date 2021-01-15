@@ -1,4 +1,4 @@
-﻿using StartOnion.CrossCutting.Extensions;
+﻿using StartOnion.CrossCutting.Extensions.Linq;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -17,7 +17,6 @@ namespace StartOnion.Camadas.Testes.Unidade.CrossCutting.Extensoes.Linq
             var resultado = query.Paginate(1, 5);
 
             Assert.Equal(new List<string> { "A", "B", "C", "D", "E" }, resultado.ToList());
-            Assert.Equal(5, resultado.Count());
         }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Raven.Client.Documents;
+using StartOnion.Application.Commands;
 using StartOnion.CrossCutting.Authentication;
 using StartOnion.CrossCutting.Notifications;
 using StartOnion.Provider.Authentication;
@@ -23,6 +24,8 @@ namespace StartOnion.DependencyInjection
         public static IServiceCollection AddStartOnionApplication(this IServiceCollection services, Assembly[] handlersAssembly)
         {
             services.AddMediatR(handlersAssembly);
+
+            services.AddScoped<ICommandSender, CommandSender>();
 
             return services;
         }
