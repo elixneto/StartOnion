@@ -12,11 +12,13 @@ namespace StartOnion.Repository.MongoDB
     {
         public readonly ContextRepositoryMongoDBAsync ContextMongoDB;
         public readonly IMongoCollection<TEntity> DbSet;
+        public readonly FilterDefinitionBuilder<TEntity> Filter;
 
         protected RepositoryMongoDBAsync(ContextRepositoryMongoDBAsync context, string collectionName)
         {
             ContextMongoDB = context;
             DbSet = ContextMongoDB.Database.GetCollection<TEntity>(collectionName);
+            Filter = Builders<TEntity>.Filter;
         }
 
         public async Task Add(TEntity entity) => await ContextMongoDB.AddCommand(async () => await DbSet.InsertOneAsync(entity));

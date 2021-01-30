@@ -12,18 +12,18 @@ namespace StartOnion.Domain
 
         private readonly IValidator _validator;
 
-        public Entity()
+        protected Entity()
         {
             SetProperties();
         }
 
-        public Entity(string id)
+        protected Entity(string id)
         {
             Id = id;
             CreationTime = DateTimeOffset.Now;
         }
 
-        public Entity(IValidator validator)
+        protected Entity(IValidator validator)
         {
             SetProperties();
             _validator = validator;

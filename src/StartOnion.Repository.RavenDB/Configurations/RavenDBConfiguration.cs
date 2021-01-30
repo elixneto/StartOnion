@@ -1,5 +1,6 @@
 ﻿using CollectionMapper.RavenDB.NetCore.Interfaces;
 using Raven.Client.Documents;
+using Raven.Client.Json.Serialization.NewtonsoftJson;
 
 namespace StartOnion.Repository.RavenDB.Configurations
 {
@@ -17,7 +18,10 @@ namespace StartOnion.Repository.RavenDB.Configurations
                 Database = databaseName,
                 Conventions = {
                     FindCollectionName = (type) => mapper.FindCollectionBy(type),
-                    JsonContractResolver = mapper.GetPropertiesContract()
+                    Serialization = new NewtonsoftJsonSerializationConventions
+                    {
+                        JsonContractResolver = mapper.GetPropertiesContract()
+                    }
                 }
             };
             DocumentStore.Initialize();
