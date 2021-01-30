@@ -92,6 +92,9 @@ namespace StartOnion.DependencyInjection
         {
             services.AddSingleton(config);
             services.AddScoped<ContextRepositoryMongoDBAsync>();
+            services.AddScoped<IContextRepositoryMongoDBAsync, ContextRepositoryMongoDBAsync>();
+            services.AddScoped<ContextRepositoryMongoDB>();
+            services.AddScoped<IContextRepositoryMongoDB, ContextRepositoryMongoDB>();
 
             return services;
         }

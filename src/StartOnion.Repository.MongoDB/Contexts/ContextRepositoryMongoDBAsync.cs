@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace StartOnion.Repository.MongoDB.Contexts
 {
-    public class ContextRepositoryMongoDBAsync
+    public class ContextRepositoryMongoDBAsync : IContextRepositoryMongoDBAsync
     {
         public IMongoClient Client { get; private set; }
         public IMongoDatabase Database { get; set; }
-        public IClientSession Session { get; private set; }
+        public IClientSessionHandle Session { get; private set; }
 
         private readonly List<Func<Task>> _commands;
 
@@ -20,6 +20,7 @@ namespace StartOnion.Repository.MongoDB.Contexts
         {
             Client = configuration.Client;
             Database = configuration.Database;
+            Session = Client.StartSession();
             _commands = new List<Func<Task>>();
         }
 
@@ -27,16 +28,14 @@ namespace StartOnion.Repository.MongoDB.Contexts
 
         public async Task Commit()
         {
-            using (Session = await Client.StartSessionAsync())
-            {
-                Session.StartTransaction();
+            Session.StartTransaction();
 
-                var commandTasks = _commands.Select(c => c());
+            var commandTasks = _commands.Select(c => c());
 
-                await Task.WhenAll(commandTasks);
+            await Task.WhenAll(commandTasks);
 
-                await Session.CommitTransactionAsync();
-            }
+            await Session.CommitTransactionAsync();
+            Session.Dispose();
         }
 
         public void Rollback()
@@ -44,6 +43,7 @@ namespace StartOnion.Repository.MongoDB.Contexts
             while (Session != null && Session.IsInTransaction)
                 Thread.Sleep(TimeSpan.FromMilliseconds(100));
 
+            Session.Dispose();
             GC.SuppressFinalize(this);
         }
     }

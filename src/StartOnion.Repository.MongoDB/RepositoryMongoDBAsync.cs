@@ -21,18 +21,18 @@ namespace StartOnion.Repository.MongoDB
             Filter = Builders<TEntity>.Filter;
         }
 
-        public async Task Add(TEntity entity) => await ContextMongoDB.AddCommand(async () => await DbSet.InsertOneAsync(entity));
+        public async Task Add(TEntity entity) => await ContextMongoDB.AddCommand(async () => await DbSet.InsertOneAsync(ContextMongoDB.Session, entity));
 
-        public async Task Add(ICollection<TEntity> entities) => await ContextMongoDB.AddCommand(async () => await DbSet.InsertManyAsync(entities));
+        public async Task Add(ICollection<TEntity> entities) => await ContextMongoDB.AddCommand(async () => await DbSet.InsertManyAsync(ContextMongoDB.Session, entities));
 
-        public async Task<IEnumerable<TEntity>> GetAll() => (await DbSet.FindAsync(DefaultFilters<TEntity>.Empty())).ToList();
+        public async Task<IEnumerable<TEntity>> GetAll() => (await DbSet.FindAsync(ContextMongoDB.Session, DefaultFilters<TEntity>.Empty())).ToList();
 
-        public async Task<TEntity> GetById(Guid id) => (await DbSet.FindAsync(DefaultFilters<TEntity>.EqualsById(id))).SingleOrDefault();
+        public async Task<TEntity> GetById(Guid id) => (await DbSet.FindAsync(ContextMongoDB.Session, DefaultFilters<TEntity>.EqualsById(id))).SingleOrDefault();
 
-        public async Task<TEntity> GetById(string id) => (await DbSet.FindAsync(DefaultFilters<TEntity>.EqualsById(id))).SingleOrDefault();
+        public async Task<TEntity> GetById(string id) => (await DbSet.FindAsync(ContextMongoDB.Session, DefaultFilters<TEntity>.EqualsById(id))).SingleOrDefault();
 
         public async Task Remove(TEntity entity) =>
-            await ContextMongoDB.AddCommand(async () => await DbSet.DeleteOneAsync(DefaultFilters<TEntity>.EqualsById(entity)));
+            await ContextMongoDB.AddCommand(async () => await DbSet.DeleteOneAsync(ContextMongoDB.Session, DefaultFilters<TEntity>.EqualsById(entity)));
 
         public async Task Remove(ICollection<TEntity> entities)
         {
@@ -41,7 +41,7 @@ namespace StartOnion.Repository.MongoDB
         }
 
         public async Task Update(TEntity entity) => 
-            await ContextMongoDB.AddCommand(async () => await DbSet.ReplaceOneAsync(DefaultFilters<TEntity>.EqualsById(entity.Id), entity));
+            await ContextMongoDB.AddCommand(async () => await DbSet.ReplaceOneAsync(ContextMongoDB.Session, DefaultFilters<TEntity>.EqualsById(entity.Id), entity));
 
         public async Task Update(ICollection<TEntity> entities)
         {
