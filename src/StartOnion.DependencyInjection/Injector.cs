@@ -21,17 +21,19 @@ namespace StartOnion.DependencyInjection
 {
     public static class Injector
     {
-        public static IServiceCollection AddStartOnionApplication(this IServiceCollection services, Assembly[] handlersAssembly)
+        public static IServiceCollection AddStartOnionApplication(this IServiceCollection services, params Assembly[] handlersAssembly)
         {
             services.AddMediatR(handlersAssembly);
-
-            services.AddScoped<ICommandSender, CommandSender>();
-
-            return services;
+            return AddStartOnionApplication(services);
         }
         public static IServiceCollection AddStartOnionApplication(this IServiceCollection services, params Type[] handlersType)
         {
             services.AddMediatR(handlersType);
+            return AddStartOnionApplication(services);
+        }
+        private static IServiceCollection AddStartOnionApplication(IServiceCollection services)
+        {
+            services.AddScoped<ICommandSender, CommandSender>();
 
             return services;
         }

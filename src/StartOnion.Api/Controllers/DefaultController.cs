@@ -10,7 +10,9 @@ namespace StartOnion.Api.Controllers
         [AllowAnonymous]
         public void Options() { }
 
-        public CreatedResult Created() => Created(string.Empty, default);
-        public CreatedResult Created(object obj) => Created(string.Empty, JsonSerializer.Serialize(obj));
+        [NonAction]
+        protected CreatedResult Created() => Created(string.Empty, default);
+        [NonAction]
+        protected CreatedResult Created(object obj) => Created(string.Empty, JsonSerializer.Serialize(obj));
     }
 }
