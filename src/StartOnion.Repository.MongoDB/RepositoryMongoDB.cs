@@ -20,17 +20,17 @@ namespace StartOnion.Repository.MongoDB
             Filter = Builders<TEntity>.Filter;
         }
 
-        public void Add(TEntity entity) => DbSet.InsertOneAsync(ContextMongoDB.Session, entity);
+        public void Add(TEntity entity) => DbSet.InsertOneAsync(entity);
 
-        public void Add(ICollection<TEntity> entities) => DbSet.InsertManyAsync(ContextMongoDB.Session, entities);
+        public void Add(ICollection<TEntity> entities) => DbSet.InsertManyAsync(entities);
 
-        public IEnumerable<TEntity> GetAll() => DbSet.Find(ContextMongoDB.Session, DefaultFilters<TEntity>.Empty()).ToList();
+        public IEnumerable<TEntity> GetAll() => DbSet.Find(DefaultFilters<TEntity>.Empty()).ToList();
 
-        public TEntity GetById(Guid id) => DbSet.Find(ContextMongoDB.Session, DefaultFilters<TEntity>.EqualsById(id)).SingleOrDefault();
+        public TEntity GetById(Guid id) => DbSet.Find(DefaultFilters<TEntity>.EqualsById(id)).SingleOrDefault();
 
-        public TEntity GetById(string id) => DbSet.Find(ContextMongoDB.Session, DefaultFilters<TEntity>.EqualsById(id)).SingleOrDefault();
+        public TEntity GetById(string id) => DbSet.Find(DefaultFilters<TEntity>.EqualsById(id)).SingleOrDefault();
 
-        public void Remove(TEntity entity) => DbSet.DeleteOneAsync(ContextMongoDB.Session, DefaultFilters<TEntity>.EqualsById(entity));
+        public void Remove(TEntity entity) => DbSet.DeleteOneAsync(DefaultFilters<TEntity>.EqualsById(entity));
 
         public void Remove(ICollection<TEntity> entities)
         {
@@ -38,7 +38,7 @@ namespace StartOnion.Repository.MongoDB
                 Remove(entity);
         }
 
-        public void Update(TEntity entity) => DbSet.ReplaceOneAsync(ContextMongoDB.Session, DefaultFilters<TEntity>.EqualsById(entity.Id), entity);
+        public void Update(TEntity entity) => DbSet.ReplaceOneAsync(DefaultFilters<TEntity>.EqualsById(entity.Id), entity);
 
         public void Update(ICollection<TEntity> entities)
         {

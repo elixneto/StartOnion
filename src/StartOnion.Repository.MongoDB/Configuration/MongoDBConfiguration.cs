@@ -14,6 +14,7 @@ namespace StartOnion.Repository.MongoDB.Configuration
         {
             ConnectionString = connectionString;
             DatabaseName = databaseName;
+
             Client = new MongoClient(connectionString);
             Database = Client.GetDatabase(databaseName);
         }

@@ -1,7 +1,6 @@
 ﻿using MongoDB.Driver;
 using StartOnion.Repository.MongoDB.Configuration;
 using System;
-using System.Threading;
 
 namespace StartOnion.Repository.MongoDB.Contexts
 {
@@ -27,9 +26,6 @@ namespace StartOnion.Repository.MongoDB.Contexts
 
         public void Rollback()
         {
-            while (Session != null && Session.IsInTransaction)
-                Thread.Sleep(TimeSpan.FromMilliseconds(100));
-
             Session.AbortTransaction();
             Session.Dispose();
             GC.SuppressFinalize(this);
